@@ -10,6 +10,10 @@ interface ComparisonMockupProps {
 export default function ComparisonMockup({
   accentColor = "purple",
 }: ComparisonMockupProps) {
+  const prefersReducedMotion = typeof window !== "undefined" 
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches 
+    : false;
+
   const colorMap = {
     emerald: { accent: "emerald", dot: "bg-emerald-400", text: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/10", gradient: "from-emerald-500 to-emerald-600", glow: "shadow-emerald-500/20", bar: "bg-emerald-500/40" },
     blue: { accent: "blue", dot: "bg-blue-400", text: "text-blue-400", border: "border-blue-500/20", bg: "bg-blue-500/10", gradient: "from-blue-500 to-blue-600", glow: "shadow-blue-500/20", bar: "bg-blue-500/40" },
@@ -146,8 +150,8 @@ export default function ComparisonMockup({
                 {/* Logo */}
                 <div className="flex items-center gap-2">
                   <motion.div
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    animate={prefersReducedMotion ? {} : { rotate: [0, 360] }}
+                    transition={{ duration: 20, repeat: prefersReducedMotion ? 0 : 1, ease: "linear" }}
                     className="w-5 h-5"
                   >
                     <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
@@ -185,14 +189,14 @@ export default function ComparisonMockup({
               <div className="relative px-4 pt-5 pb-4">
                 {/* Background decoration */}
                 <motion.div
-                  animate={{
+                  animate={prefersReducedMotion ? {} : {
                     background: [
                       "radial-gradient(circle at 60% 0%, rgba(168,85,247,0.06), transparent 60%)",
                       "radial-gradient(circle at 40% 0%, rgba(168,85,247,0.06), transparent 60%)",
                       "radial-gradient(circle at 60% 0%, rgba(168,85,247,0.06), transparent 60%)",
                     ],
                   }}
-                  transition={{ duration: 5, repeat: Infinity }}
+                  transition={{ duration: 5, repeat: prefersReducedMotion ? 0 : 1 }}
                   className="absolute inset-0 rounded-xl"
                 />
 
@@ -238,8 +242,8 @@ export default function ComparisonMockup({
                       transition={{ delay: 0.65, duration: 0.4 }}
                     >
                       <motion.div
-                        animate={{ boxShadow: ["0 0 0px rgba(168,85,247,0)", "0 0 12px rgba(168,85,247,0.2)", "0 0 0px rgba(168,85,247,0)"] }}
-                        transition={{ duration: 3, repeat: Infinity }}
+                        animate={prefersReducedMotion ? {} : { boxShadow: ["0 0 0px rgba(168,85,247,0)", "0 0 12px rgba(168,85,247,0.2)", "0 0 0px rgba(168,85,247,0)"] }}
+                        transition={{ duration: 3, repeat: prefersReducedMotion ? 0 : 2 }}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-500 to-purple-600"
                       >
                         <span className="text-[7px] text-white font-semibold">Comprar ahora</span>
@@ -259,8 +263,8 @@ export default function ComparisonMockup({
                     <div className="relative w-full aspect-square max-w-[160px] mx-auto rounded-xl bg-gradient-to-br from-purple-500/10 to-purple-600/5 border border-purple-500/15 flex items-center justify-center overflow-hidden">
                       {/* Product visual */}
                       <motion.div
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 4, repeat: Infinity }}
+                        animate={prefersReducedMotion ? {} : { scale: [1, 1.05, 1] }}
+                        transition={{ duration: 4, repeat: prefersReducedMotion ? 0 : 1 }}
                         className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400/20 to-purple-600/10 border border-purple-500/20 flex items-center justify-center"
                       >
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400/30 to-purple-600/20" />

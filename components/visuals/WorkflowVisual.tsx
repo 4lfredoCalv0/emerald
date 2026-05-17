@@ -31,41 +31,38 @@ export default function WorkflowVisual({ accentColor = "emerald" }: WorkflowVisu
   const colors = colorMap[accentColor];
 
   const steps = [
-    { label: "Lead entra", width: "w-16", delay: 0 },
-    { label: "Calificación IA", width: "w-20", delay: 0.2 },
-    { label: "Asignación", width: "w-14", delay: 0.4 },
-    { label: "Seguimiento", width: "w-18", delay: 0.6 },
-    { label: "Conversión", width: "w-16", delay: 0.8 },
+    { label: "Lead entra", delay: 0 },
+    { label: "Calificación IA", delay: 0.2 },
+    { label: "Asignación", delay: 0.4 },
+    { label: "Seguimiento", delay: 0.6 },
+    { label: "Conversión", delay: 0.8 },
   ];
 
   return (
     <div className="relative w-full max-w-lg mx-auto">
-      {/* Glow */}
-      <div className={`absolute -inset-4 ${colors.dot}/5 rounded-2xl blur-3xl`} />
-
-      <div className="relative rounded-2xl border border-white/10 bg-gray-950/60 backdrop-blur-xl p-6 shadow-2xl">
+      <div className="relative rounded-2xl border border-white/10 bg-gray-950/60 backdrop-blur-xl p-4 sm:p-6 shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${colors.dot} animate-pulse`} />
             <span className="text-xs text-gray-400 font-medium">Pipeline de automatización</span>
           </div>
-          <span className="text-[10px] text-gray-600">En tiempo real</span>
+          <span className="text-[10px] text-gray-600 hidden sm:inline">En tiempo real</span>
         </div>
 
-        {/* Pipeline */}
-        <div className="flex items-center gap-0">
+        {/* Pipeline - Vertical on mobile, horizontal on desktop */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-0">
           {steps.map((step, i) => (
-            <div key={i} className="flex items-center flex-1">
+            <div key={i} className="flex sm:flex-1 flex-col sm:flex-row items-center">
               {/* Step block */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + step.delay, duration: 0.5 }}
-                className="flex flex-col items-center"
+                className="flex flex-col items-center w-full sm:w-auto"
               >
-                <div className={`h-10 ${step.width} rounded-lg bg-gradient-to-br ${colors.bar} border border-white/[0.06] flex items-center justify-center mb-2`}>
-                  <span className="text-[9px] text-white/70 font-medium text-center leading-tight">
+                <div className={`h-10 w-full sm:w-auto min-w-[100px] px-3 rounded-lg bg-gradient-to-br ${colors.bar} border border-white/[0.06] flex items-center justify-center mb-2`}>
+                  <span className="text-[10px] sm:text-[9px] text-white/70 font-medium text-center leading-tight">
                     {step.label}
                   </span>
                 </div>
@@ -80,16 +77,17 @@ export default function WorkflowVisual({ accentColor = "emerald" }: WorkflowVisu
                     repeat: Infinity,
                     delay: step.delay,
                   }}
-                  className={`w-1.5 h-1.5 rounded-full ${colors.dot}`}
+                  className={`w-1.5 h-1.5 rounded-full ${colors.dot} sm:mb-0 mb-2`}
                 />
               </motion.div>
 
-              {/* Connector line */}
+              {/* Connector line - Vertical on mobile, horizontal on desktop */}
               {i < steps.length - 1 && (
-                <div className={`flex-1 h-px ${colors.line} mx-1 relative`}>
+                <div className={`sm:flex-1 w-px sm:w-auto sm:h-px h-8 ${colors.line} relative mx-auto sm:mx-1`}>
                   <motion.div
-                    className={`absolute top-0 left-0 h-full w-3 ${colors.dot} rounded-full`}
+                    className={`absolute top-0 left-0 sm:h-full sm:w-3 w-full h-1.5 ${colors.dot} rounded-full`}
                     animate={{
+                      top: ["0%", "100%"],
                       left: ["0%", "100%"],
                       opacity: [0, 1, 0],
                     }}
@@ -111,7 +109,7 @@ export default function WorkflowVisual({ accentColor = "emerald" }: WorkflowVisu
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.5 }}
-          className="mt-6 pt-4 border-t border-white/5 grid grid-cols-3 gap-3"
+          className="mt-4 sm:mt-6 pt-4 border-t border-white/5 grid grid-cols-3 gap-3"
         >
           {[
             { label: "En pipeline", value: "47" },
@@ -119,7 +117,7 @@ export default function WorkflowVisual({ accentColor = "emerald" }: WorkflowVisu
             { label: "Tiempo promedio", value: "2.3h" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
-              <p className="text-lg font-bold text-white">{stat.value}</p>
+              <p className="text-base sm:text-lg font-bold text-white">{stat.value}</p>
               <p className="text-[9px] text-gray-500">{stat.label}</p>
             </div>
           ))}

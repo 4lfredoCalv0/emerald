@@ -28,6 +28,11 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
 
   const colors = colorMap[accentColor];
 
+  // Check for reduced motion preference
+  const prefersReducedMotion = typeof window !== "undefined" 
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches 
+    : false;
+
   if (type === "nodes") {
     return (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -40,14 +45,14 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
-            animate={{
+            animate={prefersReducedMotion ? {} : {
               y: [0, -20 + Math.random() * 40, 0],
               x: [0, -10 + Math.random() * 20, 0],
               opacity: [0.1, 0.4, 0.1],
             }}
             transition={{
               duration: 4 + Math.random() * 4,
-              repeat: Infinity,
+              repeat: prefersReducedMotion ? 0 : 2,
               delay: Math.random() * 2,
               ease: "easeInOut",
             }}
@@ -66,11 +71,11 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
         {/* Central glow */}
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={{
+          animate={prefersReducedMotion ? {} : {
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.6, 0.3],
           }}
-          transition={{ duration: 4, repeat: Infinity }}
+          transition={{ duration: 4, repeat: prefersReducedMotion ? 0 : 1 }}
         >
           <div
             className="rounded-full blur-3xl"
@@ -96,7 +101,7 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
               fill="none"
               stroke={`rgba(${colors.primary}, ${0.05 + i * 0.02})`}
               strokeWidth="1"
-              animate={{
+              animate={prefersReducedMotion ? {} : {
                 d: [
                   `M 0,${150 + i * 50} Q 200,${100 + i * 50} 400,${150 + i * 50} T 800,${150 + i * 50}`,
                   `M 0,${150 + i * 50} Q 200,${200 + i * 50} 400,${150 + i * 50} T 800,${150 + i * 50}`,
@@ -105,7 +110,7 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
               }}
               transition={{
                 duration: 6 + i * 2,
-                repeat: Infinity,
+                repeat: prefersReducedMotion ? 0 : 1,
                 ease: "easeInOut",
               }}
             />
@@ -147,13 +152,13 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
             left: `${15 + i * 15}%`,
             top: `${20 + (i % 3) * 25}%`,
           }}
-          animate={{
+          animate={prefersReducedMotion ? {} : {
             y: [0, -15, 0],
             opacity: [0.2, 0.5, 0.2],
           }}
           transition={{
             duration: 3 + i,
-            repeat: Infinity,
+            repeat: prefersReducedMotion ? 0 : 2,
             delay: i * 0.5,
             ease: "easeInOut",
           }}

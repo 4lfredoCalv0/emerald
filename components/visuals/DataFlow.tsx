@@ -8,6 +8,10 @@ interface DataFlowProps {
 }
 
 export default function DataFlow({ accentColor = "purple" }: DataFlowProps) {
+  const prefersReducedMotion = typeof window !== "undefined" 
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches 
+    : false;
+
   const tools = [
     { x: 15, y: 25, icon: "mail" },
     { x: 50, y: 10, icon: "chat" },
@@ -131,13 +135,13 @@ export default function DataFlow({ accentColor = "purple" }: DataFlowProps) {
                   r="0.7"
                   fill="rgba(168,85,247,0.7)"
                   filter="url(#glowDot)"
-                  animate={{
+                  animate={prefersReducedMotion ? {} : {
                     offsetDistance: ["0%", "100%"],
                     opacity: [0, 0.8, 0.8, 0],
                   }}
                   transition={{
                     duration: 2,
-                    repeat: Infinity,
+                    repeat: prefersReducedMotion ? 0 : 2,
                     delay: i * 0.25,
                     ease: "easeInOut",
                   }}
@@ -158,8 +162,8 @@ export default function DataFlow({ accentColor = "purple" }: DataFlowProps) {
                 fill="none"
                 stroke="rgba(168,85,247,0.2)"
                 strokeWidth="0.4"
-                animate={{ r: [13, 17, 13], opacity: [0.2, 0.5, 0.2] }}
-                transition={{ duration: 2.5, repeat: Infinity }}
+                animate={prefersReducedMotion ? {} : { r: [13, 17, 13], opacity: [0.2, 0.5, 0.2] }}
+                transition={{ duration: 2.5, repeat: prefersReducedMotion ? 0 : 1 }}
               />
               {/* Middle ring */}
               <motion.circle
@@ -169,8 +173,8 @@ export default function DataFlow({ accentColor = "purple" }: DataFlowProps) {
                 fill="none"
                 stroke="rgba(168,85,247,0.3)"
                 strokeWidth="0.3"
-                animate={{ r: [10, 12, 10] }}
-                transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                animate={prefersReducedMotion ? {} : { r: [10, 12, 10] }}
+                transition={{ duration: 3, repeat: prefersReducedMotion ? 0 : 1, delay: 0.5 }}
               />
               {/* Core */}
               <circle
@@ -187,8 +191,8 @@ export default function DataFlow({ accentColor = "purple" }: DataFlowProps) {
                 cy={hub.y}
                 r="5"
                 fill="rgba(168,85,247,0.1)"
-                animate={{ r: [4, 6, 4], opacity: [0.2, 0.5, 0.2] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={prefersReducedMotion ? {} : { r: [4, 6, 4], opacity: [0.2, 0.5, 0.2] }}
+                transition={{ duration: 2, repeat: prefersReducedMotion ? 0 : 1 }}
               />
               {/* Hexagon symbol in center */}
               <polygon
@@ -210,8 +214,8 @@ export default function DataFlow({ accentColor = "purple" }: DataFlowProps) {
                   fill="none"
                   stroke="rgba(168,85,247,0.15)"
                   strokeWidth="0.3"
-                  animate={{ r: [6, 8.5, 6], opacity: [0.2, 0.5, 0.2] }}
-                  transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.2 }}
+                  animate={prefersReducedMotion ? {} : { r: [6, 8.5, 6], opacity: [0.2, 0.5, 0.2] }}
+                  transition={{ duration: 2.5, repeat: prefersReducedMotion ? 0 : 1, delay: i * 0.2 }}
                 />
                 {/* Node circle */}
                 <circle
@@ -230,8 +234,8 @@ export default function DataFlow({ accentColor = "purple" }: DataFlowProps) {
                   cy={tool.y - 7}
                   r="0.6"
                   fill="rgba(16,185,129,0.7)"
-                  animate={{ opacity: [0.2, 1, 0.2] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
+                  animate={prefersReducedMotion ? {} : { opacity: [0.2, 1, 0.2] }}
+                  transition={{ duration: 1.5, repeat: prefersReducedMotion ? 0 : 2, delay: i * 0.3 }}
                 />
               </g>
             ))}

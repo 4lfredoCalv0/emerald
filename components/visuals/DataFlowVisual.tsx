@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { Globe, MessageSquare, Mail, Database, Zap, BarChart3, Activity } from "lucide-react";
 
 export default function DataFlowVisual() {
+  const prefersReducedMotion = typeof window !== "undefined" 
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches 
+    : false;
+
   const sources = [
     { icon: Globe, label: "Web", x: 15, y: 20 },
     { icon: MessageSquare, label: "WhatsApp", x: 50, y: 10 },
@@ -70,13 +74,13 @@ export default function DataFlowVisual() {
                   r="0.8"
                   fill="rgba(16,185,129,0.8)"
                   filter="url(#glow)"
-                  animate={{
+                  animate={prefersReducedMotion ? {} : {
                     offsetDistance: ["0%", "100%"],
                     opacity: [0, 1, 1, 0],
                   }}
                   transition={{
                     duration: 2,
-                    repeat: Infinity,
+                    repeat: prefersReducedMotion ? 0 : 2,
                     delay: i * 0.6,
                     ease: "easeInOut",
                   }}
@@ -99,13 +103,13 @@ export default function DataFlowVisual() {
                 r="1"
                 fill="rgba(168,85,247,0.8)"
                 filter="url(#glow)"
-                animate={{
+                animate={prefersReducedMotion ? {} : {
                   cy: [50 + 12, 72 - 12],
                   opacity: [0, 1, 1, 0],
                 }}
                 transition={{
                   duration: 1.5,
-                  repeat: Infinity,
+                  repeat: prefersReducedMotion ? 0 : 2,
                   ease: "easeInOut",
                 }}
               />
@@ -128,13 +132,13 @@ export default function DataFlowVisual() {
                   r="0.8"
                   fill={path.color}
                   filter="url(#glow)"
-                  animate={{
+                  animate={prefersReducedMotion ? {} : {
                     offsetDistance: ["0%", "100%"],
                     opacity: [0, 1, 1, 0],
                   }}
                   transition={{
                     duration: 1.8,
-                    repeat: Infinity,
+                    repeat: prefersReducedMotion ? 0 : 2,
                     delay: i * 0.9,
                     ease: "easeInOut",
                   }}
@@ -150,16 +154,16 @@ export default function DataFlowVisual() {
               const Icon = source.icon;
               return (
                 <g key={`source-${i}`}>
-                  <motion.circle
-                    cx={source.x}
-                    cy={source.y}
-                    r="10"
-                    fill="none"
-                    stroke="rgba(16,185,129,0.2)"
-                    strokeWidth="0.3"
-                    animate={{ r: [9, 12, 9] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                  />
+              <motion.circle
+                cx={source.x}
+                cy={source.y}
+                r="10"
+                fill="none"
+                stroke="rgba(16,185,129,0.2)"
+                strokeWidth="0.3"
+                animate={prefersReducedMotion ? {} : { r: [9, 12, 9] }}
+                transition={{ duration: 2, repeat: prefersReducedMotion ? 0 : 1, delay: i * 0.3 }}
+              />
                   <circle
                     cx={source.x}
                     cy={source.y}
@@ -191,8 +195,8 @@ export default function DataFlowVisual() {
                 fill="none"
                 stroke="rgba(168,85,247,0.25)"
                 strokeWidth="0.4"
-                animate={{ r: [11, 14, 11] }}
-                transition={{ duration: 2.5, repeat: Infinity }}
+                animate={prefersReducedMotion ? {} : { r: [11, 14, 11] }}
+                transition={{ duration: 2.5, repeat: prefersReducedMotion ? 0 : 1 }}
               />
               <circle
                 cx="50"

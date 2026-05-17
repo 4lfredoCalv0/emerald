@@ -7,6 +7,10 @@ interface CommunicationFlowProps {
 }
 
 export default function CommunicationFlow({ accentColor = "blue" }: CommunicationFlowProps) {
+  const prefersReducedMotion = typeof window !== "undefined" 
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches 
+    : false;
+
   const colorMap = {
     emerald: {
       bubble: "bg-emerald-500/10 border-emerald-500/20",
@@ -90,8 +94,8 @@ export default function CommunicationFlow({ accentColor = "blue" }: Communicatio
           {/* Typing indicator */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ delay: 2, duration: 1.5, repeat: Infinity }}
+            animate={prefersReducedMotion ? {} : { opacity: [0, 1, 0] }}
+            transition={{ delay: 2, duration: 1.5, repeat: prefersReducedMotion ? 0 : 3 }}
             className="flex justify-start"
           >
             <div className={`px-3 py-2 rounded-2xl rounded-bl-md ${colors.bubble} border flex gap-1`}>

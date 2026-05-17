@@ -7,6 +7,10 @@ interface SystemDiagramProps {
 }
 
 export default function SystemDiagram({ accentColor = "emerald" }: SystemDiagramProps) {
+  const prefersReducedMotion = typeof window !== "undefined" 
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches 
+    : false;
+
   const colorMap = {
     emerald: {
       node: "fill-emerald-500/20 stroke-emerald-500/40",
@@ -85,7 +89,7 @@ export default function SystemDiagram({ accentColor = "emerald" }: SystemDiagram
               r="2"
               className={colors.pulse}
               initial={{ cx: a.x, cy: a.y, opacity: 0 }}
-              animate={{
+              animate={prefersReducedMotion ? {} : {
                 cx: [a.x, b.x],
                 cy: [a.y, b.y],
                 opacity: [0, 0.8, 0],
@@ -93,7 +97,7 @@ export default function SystemDiagram({ accentColor = "emerald" }: SystemDiagram
               transition={{
                 delay: 1 + i * 0.3,
                 duration: 2,
-                repeat: Infinity,
+                repeat: prefersReducedMotion ? 0 : 2,
                 repeatDelay: 1,
                 ease: "easeInOut",
               }}
@@ -136,13 +140,13 @@ export default function SystemDiagram({ accentColor = "emerald" }: SystemDiagram
           r="20"
           className={colors.pulse}
           initial={{ opacity: 0, r: 16 }}
-          animate={{
+          animate={prefersReducedMotion ? {} : {
             opacity: [0, 0.15, 0],
             r: [16, 28, 16],
           }}
           transition={{
             duration: 2,
-            repeat: Infinity,
+            repeat: prefersReducedMotion ? 0 : 2,
             ease: "easeOut",
           }}
         />
