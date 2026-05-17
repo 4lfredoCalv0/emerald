@@ -116,7 +116,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.02 }}
           >
             <img
-              src="/logomark.svg"
+              src="/logomark.png"
               alt="Emerald"
               className="w-8 h-8"
             />
