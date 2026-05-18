@@ -43,6 +43,7 @@ import SolutionCTA from "@/components/solutions/SolutionCTA";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CommunicationFlow from "@/components/visuals/CommunicationFlow";
 import WorkflowVisual from "@/components/visuals/WorkflowVisual";
+import FAQSection from "@/components/seo/faq-section";
 
 export default function ChatbotsPage() {
   return (
@@ -261,6 +262,29 @@ export default function ChatbotsPage() {
           { name: "Educación y cursos", icon: GraduationCap },
           { name: "Constructoras", icon: HardHat },
           { name: "Agencias de viajes", icon: Plane },
+        ]}
+      />
+
+      {/* FAQ */}
+      <FAQSection
+        accentColor="blue"
+        items={[
+          {
+            question: "¿El chatbot puede atender en español?",
+            answer: "Sí. Nuestros chatbots están configurados para atender en español con respuestas naturales y contextuales. También pueden manejar múltiples idiomas si tu negocio lo requiere.",
+          },
+          {
+            question: "¿Puedo personalizar las respuestas del chatbot?",
+            answer: "Absolutamente. Diseñamos cada flujo de conversación basado en las preguntas reales de tus clientes. Tú defines el tono, las respuestas y las reglas de escalamiento a un agente humano.",
+          },
+          {
+            question: "¿Funciona con WhatsApp Business?",
+            answer: "Sí. Integramos con la API oficial de WhatsApp Business para automatización completa: respuestas, calificación de leads, agenda de citas y seguimiento.",
+          },
+          {
+            question: "¿Qué pasa si el chatbot no puede responder una pregunta?",
+            answer: "El sistema está diseñado para escalar automáticamente a un agente humano cuando detecta una consulta que requiere intervención personal. Nunca pierdes una oportunidad de venta.",
+          },
         ]}
       />
 

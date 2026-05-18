@@ -6,6 +6,8 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import { getAllPosts, getPostBySlug, BlogPostMeta } from "@/lib/blog";
+import { generateArticleSchema } from "@/lib/seo/schema";
+import { generatePageMetadata } from "@/lib/seo/metadata";
 import ArticleClient from "./ArticleClient";
 
 const BASE_URL = "https://emerald-co.vercel.app";
@@ -24,6 +26,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${post.title} — Blog Emerald`,
     description: post.description,
+    keywords: post.tags.join(", "),
     alternates: {
       canonical: postUrl,
     },
@@ -73,31 +76,14 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 2);
 
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
+  const articleSchema = generateArticleSchema({
+    title: post.title,
     description: post.description,
     datePublished: post.date,
-    author: {
-      "@type": "Organization",
-      name: "Emerald",
-      url: BASE_URL,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Emerald",
-      url: BASE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${BASE_URL}/LogoEmeraldNBG.png`,
-      },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${BASE_URL}/blog/${post.slug}`,
-    },
-  };
+    dateModified: post.date,
+    keywords: post.tags,
+    slug: post.slug,
+  });
 
   return (
     <>

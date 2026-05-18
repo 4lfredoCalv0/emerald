@@ -39,6 +39,7 @@ import IndustryFit from "@/components/solutions/IndustryFit";
 import SolutionCTA from "@/components/solutions/SolutionCTA";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import HeroVisual from "@/components/visuals/HeroVisual";
+import FAQSection from "@/components/seo/faq-section";
 const ComparisonMockup = dynamic(() => import("@/components/visuals/ComparisonMockup"), {
   loading: () => <div className="h-80 bg-gray-900/50 animate-pulse rounded-xl" />,
 });
@@ -237,6 +238,29 @@ export default function PresenciaDigitalPage() {
           { name: "Servicios de belleza", icon: Sparkles },
           { name: "Educación y cursos", icon: GraduationCap },
           { name: "Comercio electrónico", icon: ShoppingCart },
+        ]}
+      />
+
+      {/* FAQ */}
+      <FAQSection
+        accentColor="emerald"
+        items={[
+          {
+            question: "¿Cuánto cuesta un sitio web premium con Emerald?",
+            answer: "Cada proyecto es único. Diseñamos soluciones modulares que se adaptan al tamaño y presupuesto de tu negocio. Agenda una consulta gratuita para recibir una cotización personalizada.",
+          },
+          {
+            question: "¿Cuánto tiempo toma crear mi presencia digital?",
+            answer: "Un sitio web premium típico se entrega en 2-4 semanas, dependiendo de la complejidad. Landing pages pueden estar listas en menos de una semana.",
+          },
+          {
+            question: "¿Incluyen SEO en el diseño del sitio web?",
+            answer: "Sí. Cada sitio incluye optimización SEO técnica: velocidad de carga, estructura semántica, meta tags, schema markup y SEO local para que clientes de tu zona te encuentren en Google.",
+          },
+          {
+            question: "¿Puedo actualizar el contenido de mi sitio web después?",
+            answer: "Sí. Construimos sitios con sistemas de gestión de contenido que te permiten actualizar textos, imágenes y productos sin necesidad de conocimientos técnicos.",
+          },
         ]}
       />
 

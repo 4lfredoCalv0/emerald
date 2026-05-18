@@ -7,6 +7,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DashboardMockup from "@/components/visuals/DashboardMockup";
 import ParticleField from "@/components/ParticleField";
+import { generateWebSiteSchema, generateBreadcrumbSchema } from "@/lib/seo/schema";
+
+const websiteSchema = generateWebSiteSchema();
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Inicio", url: "https://emerald-co.vercel.app" },
+]);
 
 const stats = [
   { value: "83%", label: "automatización de procesos" },
@@ -523,6 +529,14 @@ export default function Home() {
 
         <Footer />
       </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
     </main>
   );
 }

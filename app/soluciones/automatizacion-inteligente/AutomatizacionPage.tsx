@@ -41,6 +41,7 @@ import SolutionCTA from "@/components/solutions/SolutionCTA";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import WorkflowVisual from "@/components/visuals/WorkflowVisual";
 import DataFlow from "@/components/visuals/DataFlow";
+import FAQSection from "@/components/seo/faq-section";
 
 export default function AutomatizacionPage() {
   return (
@@ -299,6 +300,29 @@ export default function AutomatizacionPage() {
           { name: "Servicios de belleza", icon: Sparkles },
           { name: "Educación y cursos", icon: GraduationCap },
           { name: "Distribuidoras", icon: Truck },
+        ]}
+      />
+
+      {/* FAQ */}
+      <FAQSection
+        accentColor="purple"
+        items={[
+          {
+            question: "¿Qué herramientas pueden integrarse con la automatización?",
+            answer: "Conectamos con más de 50 herramientas: facturación electrónica, inventarios, CRM, pasarelas de pago, redes sociales, email marketing, Google Sheets, y muchas más. Si tu herramienta tiene API, la conectamos.",
+          },
+          {
+            question: "¿Necesito conocimientos técnicos para usar el sistema?",
+            answer: "No. Diseñamos dashboards intuitivos y capacitamos a tu equipo. El sistema funciona automáticamente en segundo plano — tú solo ves los resultados.",
+          },
+          {
+            question: "¿Mis datos están seguros con la automatización?",
+            answer: "Sí. Implementamos cifrado de datos, respaldos automáticos y cumplimos con estándares de privacidad. Tus datos nunca se comparten con terceros.",
+          },
+          {
+            question: "¿Cuánto tiempo toma implementar la automatización?",
+            answer: "Depende de la complejidad. Una automatización básica puede estar lista en 1-2 semanas. Sistemas completos con múltiples integraciones toman 3-6 semanas.",
+          },
         ]}
       />
 

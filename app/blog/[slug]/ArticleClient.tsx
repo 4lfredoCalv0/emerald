@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Clock, ArrowLeft, ArrowRight, Tag, Calendar } from "lucide-react";
 import { BlogPost, BlogPostMeta } from "@/lib/blog";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import TableOfContents from "@/components/seo/table-of-contents";
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr + "T00:00:00");
@@ -30,6 +31,7 @@ export default function ArticleClient({ post, htmlContent, relatedPosts }: Artic
           { label: post.title, href: `/blog/${post.slug}` },
         ]}
       />
+      <TableOfContents htmlContent={htmlContent} />
       <section className="relative pt-4 pb-12 px-4">
         <div className="max-w-3xl mx-auto">
           <motion.div
