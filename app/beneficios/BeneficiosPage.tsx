@@ -37,13 +37,14 @@ const itemVariants = {
 export default function BeneficiosPage() {
   return (
     <div className="relative">
-      <Breadcrumbs items={[{ label: "Beneficios", href: "/beneficios" }]} />
       {/* Hero */}
-      <section className="relative min-h-[50vh] flex items-center justify-center pt-4 pb-16 px-4 overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden">
         <HeroVisual accentColor="emerald" type="nodes" />
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 via-transparent to-transparent" />
 
-        <div className="relative max-w-4xl mx-auto text-center">
+        <div className="relative max-w-4xl mx-auto w-full">
+          <Breadcrumbs items={[{ label: "Beneficios", href: "/beneficios" }]} />
+          <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,6 +73,7 @@ export default function BeneficiosPage() {
             De negocio tradicional a empresa moderna. Resultados que se notan desde
             el primer mes de operación.
           </motion.p>
+          </div>
         </div>
       </section>
 

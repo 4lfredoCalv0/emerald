@@ -238,9 +238,8 @@ function SolutionCard({ sol, index }: { sol: typeof soluciones[0]; index: number
 export default function SolucionesPage() {
   return (
     <div className="relative">
-      <Breadcrumbs items={[{ label: "Soluciones", href: "/soluciones" }]} />
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-center justify-center pt-4 pb-16 px-4 overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden">
         <HeroVisual accentColor="emerald" type="grid" />
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 via-transparent to-transparent" />
 
@@ -250,7 +249,9 @@ export default function SolucionesPage() {
           <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
         </div>
 
-        <div className="relative max-w-5xl mx-auto text-center">
+        <div className="relative max-w-5xl mx-auto w-full">
+          <Breadcrumbs items={[{ label: "Soluciones", href: "/soluciones" }]} />
+          <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -292,6 +293,7 @@ export default function SolucionesPage() {
             <div className="w-2 h-2 rounded-full bg-emerald-400" />
             <div className="w-16 h-px bg-emerald-500/20" />
           </motion.div>
+          </div>
         </div>
       </section>
 

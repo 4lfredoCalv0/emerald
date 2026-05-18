@@ -125,13 +125,14 @@ export default function AgendaPage() {
 
   return (
     <div className="relative">
-      <Breadcrumbs items={[{ label: "Agenda tu Consulta", href: "/agenda" }]} />
       {/* Hero */}
-      <section className="relative min-h-[40vh] flex items-center justify-center pt-4 pb-16 px-4 overflow-hidden">
+      <section className="relative min-h-[40vh] flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden">
         <HeroVisual accentColor="emerald" type="nodes" />
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 via-transparent to-transparent" />
 
-        <div className="relative max-w-4xl mx-auto text-center">
+        <div className="relative max-w-4xl mx-auto w-full">
+          <Breadcrumbs items={[{ label: "Agenda tu Consulta", href: "/agenda" }]} />
+          <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -161,6 +162,7 @@ export default function AgendaPage() {
             30 minutos para analizar tu operación actual y diseñar
             la estrategia de modernización que tu negocio necesita.
           </motion.p>
+          </div>
         </div>
       </section>
 
