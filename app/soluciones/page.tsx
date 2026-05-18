@@ -217,12 +217,7 @@ function SolutionCard({ sol, index }: { sol: typeof soluciones[0]; index: number
             {/* CTA */}
             <div className={`flex items-center gap-2 text-sm ${colors.ctaText} font-medium`}>
               <span>Explorar solución</span>
-              <motion.div
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <ArrowRight className="w-4 h-4" />
-              </motion.div>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </div>
           </div>
 
@@ -258,9 +253,9 @@ export default function SolucionesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm mb-8 animate-glow-pulse"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm mb-8"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span>Nuestras soluciones</span>
           </motion.div>
 
@@ -271,7 +266,7 @@ export default function SolucionesPage() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
           >
             Sistemas inteligentes para{" "}
-            <span className="gradient-text animate-gradient-x">tu negocio</span>
+            <span className="gradient-text">tu negocio</span>
           </motion.h1>
 
           <motion.p
@@ -292,7 +287,7 @@ export default function SolucionesPage() {
             className="mt-10 flex items-center justify-center gap-3"
           >
             <div className="w-16 h-px bg-emerald-500/20" />
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-emerald-400" />
             <div className="w-16 h-px bg-emerald-500/20" />
           </motion.div>
         </div>
@@ -318,7 +313,7 @@ export default function SolucionesPage() {
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
               Transformamos tu negocio{" "}
-              <span className="gradient-text animate-gradient-x">desde la raíz</span>
+              <span className="gradient-text">desde la raíz</span>
             </h2>
             <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
               Presencia digital premium, comunicación inteligente y automatización.
@@ -380,7 +375,7 @@ export default function SolucionesPage() {
             <div className="relative z-10">
               {/* Status indicator */}
               <div className="flex items-center justify-center gap-2 mb-6">
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-emerald-400" />
                 <span className="text-xs text-emerald-400 font-medium">Consulta disponible</span>
               </div>
 
@@ -397,12 +392,7 @@ export default function SolucionesPage() {
                 className="group inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-white bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full hover:from-emerald-400 hover:to-emerald-500 transition-all shadow-lg shadow-emerald-500/25"
               >
                 Agenda tu consulta estratégica
-                <motion.div
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-5 h-5" />
-                </motion.div>
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           </motion.div>

@@ -147,7 +147,7 @@ export default function AgendaPage() {
             className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight"
           >
             Agenda tu consulta{" "}
-            <span className="gradient-text animate-gradient-x">estratégica</span>
+            <span className="gradient-text">estratégica</span>
           </motion.h1>
 
           <motion.p
@@ -331,9 +331,11 @@ export default function AgendaPage() {
                         } disabled:opacity-50`}
                         placeholder="Tu nombre"
                       />
-                      {errors.nombre && touched.nombre && (
-                        <p className="mt-1.5 text-xs text-red-400">{errors.nombre}</p>
-                      )}
+                      <div className="min-h-[1.25rem] mt-1.5">
+                        {errors.nombre && touched.nombre && (
+                          <p className="text-xs text-red-400">{errors.nombre}</p>
+                        )}
+                      </div>
                     </div>
                     <div>
                       <label
@@ -379,9 +381,11 @@ export default function AgendaPage() {
                         } disabled:opacity-50`}
                         placeholder="tu@email.com"
                       />
-                      {errors.email && touched.email && (
-                        <p className="mt-1.5 text-xs text-red-400">{errors.email}</p>
-                      )}
+                      <div className="min-h-[1.25rem] mt-1.5">
+                        {errors.email && touched.email && (
+                          <p className="text-xs text-red-400">{errors.email}</p>
+                        )}
+                      </div>
                     </div>
                     <div>
                       <label
@@ -450,9 +454,11 @@ export default function AgendaPage() {
                       } disabled:opacity-50`}
                       placeholder="Breve descripción de tu negocio y qué te gustaría mejorar..."
                     />
-                    {errors.mensaje && touched.mensaje && (
-                      <p className="mt-1.5 text-xs text-red-400">{errors.mensaje}</p>
-                    )}
+                    <div className="min-h-[1.25rem] mt-1.5">
+                      {errors.mensaje && touched.mensaje && (
+                        <p className="text-xs text-red-400">{errors.mensaje}</p>
+                      )}
+                    </div>
                   </div>
 
                   <button

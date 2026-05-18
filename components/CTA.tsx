@@ -47,7 +47,7 @@ export default function CTA() {
               className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6"
             >
               ¿Listo para modernizar tu{" "}
-              <span className="gradient-text animate-gradient-x">operación?</span>
+              <span className="gradient-text">operación?</span>
             </motion.h2>
 
             <motion.p

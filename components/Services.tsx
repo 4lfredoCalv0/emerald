@@ -25,7 +25,7 @@ const services = [
     subtitle: "Comunicación inteligente",
     description:
       "Sistemas que atienden clientes, califican leads y agendan citas al instante por WhatsApp y web. Tu negocio responde siempre — cada mensaje se convierte en oportunidad.",
-    gradient: "from-blue-400 to-cyan-500",
+    gradient: "from-emerald-500 to-emerald-600",
     outcomes: [
       "Respondes clientes al instante",
       "Nunca pierdes un lead",
@@ -39,7 +39,7 @@ const services = [
     subtitle: "Operaciones con IA",
     description:
       "Conectamos tus herramientas y automatizamos procesos: facturación, inventarios, CRM, marketing, seguimiento de clientes. Tu equipo se enfoca en lo importante, el sistema se encarga del resto.",
-    gradient: "from-purple-400 to-pink-500",
+    gradient: "from-emerald-500 to-teal-500",
     outcomes: [
       "Eliminas tareas repetitivas",
       "Todo conectado y sincronizado",
@@ -165,7 +165,7 @@ export default function Services() {
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
             Transformamos tu negocio{" "}
-            <span className="gradient-text animate-gradient-x">desde la raíz</span>
+            <span className="gradient-text">desde la raíz</span>
           </h2>
           <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
             Presencia digital premium, comunicación inteligente y automatización.
@@ -175,7 +175,7 @@ export default function Services() {
           {/* Visual connector line */}
           <div className="mt-8 flex items-center justify-center gap-2">
             <div className="w-8 h-px bg-emerald-500/30" />
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-emerald-400" />
             <div className="w-8 h-px bg-emerald-500/30" />
           </div>
         </motion.div>

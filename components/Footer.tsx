@@ -103,14 +103,19 @@ export default function Footer() {
             </div>
 
             <div className="flex items-center gap-4 mt-6">
-              {[Github, Linkedin, Instagram].map((Icon, i) => (
-                <motion.a
-                  key={i}
-                  href="#"
-                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all"
-                  whileHover={{ scale: 1.1, y: -3, rotate: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+              {[
+                { Icon: Github, label: "GitHub" },
+                { Icon: Linkedin, label: "LinkedIn" },
+                { Icon: Instagram, label: "Instagram" },
+              ].map(({ Icon, label }, i) => (
+              <motion.a
+                key={i}
+                aria-label={label}
+                href="#"
+                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all"
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+              >
                   <Icon className="w-4 h-4" />
                 </motion.a>
               ))}
@@ -131,10 +136,8 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 {links.map((link, i) => (
-                  <motion.li
+                  <li
                     key={i}
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
                   >
                     <a
                       href={link.href}
@@ -142,7 +145,7 @@ export default function Footer() {
                     >
                       {link.label}
                     </a>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </motion.div>
@@ -167,13 +170,7 @@ export default function Footer() {
             className="text-sm text-gray-500"
           >
             Hecho con{" "}
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-emerald-400 inline-block"
-            >
-              &hearts;
-            </motion.span>{" "}
+            <span className="text-emerald-400 inline-block">&hearts;</span>{" "}
             en Barranquilla, Colombia
           </motion.p>
         </div>
@@ -181,6 +178,7 @@ export default function Footer() {
 
       <motion.button
         onClick={scrollToTop}
+        aria-label="Volver arriba"
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
@@ -196,6 +194,7 @@ export default function Footer() {
         href="https://wa.me/573239168300"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Contactar por WhatsApp"
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}

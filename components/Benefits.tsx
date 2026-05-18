@@ -123,7 +123,7 @@ export default function Benefits() {
               <div className="glass-card p-6 sm:p-8 lg:p-10 transition-all duration-500 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5">
                 {/* Step number */}
                 <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
-                  <span className="text-xs font-mono text-gray-700">
+                  <span className="text-xs font-mono text-gray-500">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>

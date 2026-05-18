@@ -219,18 +219,12 @@ export default function Testimonials() {
           ))}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 text-center"
-        >
+        <div className="mt-12 text-center">
           <p className="text-sm text-gray-500 max-w-lg mx-auto leading-relaxed">
             Cada negocio tiene su propio camino de transformación.
             El tuyo empieza con una conversación.
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

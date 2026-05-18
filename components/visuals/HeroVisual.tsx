@@ -52,7 +52,7 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
             }}
             transition={{
               duration: 4 + Math.random() * 4,
-              repeat: prefersReducedMotion ? 0 : 2,
+              repeat: prefersReducedMotion ? 0 : Infinity,
               delay: Math.random() * 2,
               ease: "easeInOut",
             }}
@@ -75,7 +75,7 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.6, 0.3],
           }}
-          transition={{ duration: 4, repeat: prefersReducedMotion ? 0 : 1 }}
+          transition={{ duration: 4, repeat: prefersReducedMotion ? 0 : Infinity }}
         >
           <div
             className="rounded-full blur-3xl"
@@ -110,7 +110,7 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
               }}
               transition={{
                 duration: 6 + i * 2,
-                repeat: prefersReducedMotion ? 0 : 1,
+                repeat: prefersReducedMotion ? 0 : Infinity,
                 ease: "easeInOut",
               }}
             />
@@ -156,12 +156,12 @@ export default function HeroVisual({ accentColor = "emerald", type = "grid" }: H
             y: [0, -15, 0],
             opacity: [0.2, 0.5, 0.2],
           }}
-          transition={{
-            duration: 3 + i,
-            repeat: prefersReducedMotion ? 0 : 2,
-            delay: i * 0.5,
-            ease: "easeInOut",
-          }}
+            transition={{
+              duration: 3 + i,
+              repeat: prefersReducedMotion ? 0 : Infinity,
+              delay: i * 0.5,
+              ease: "easeInOut",
+            }}
         >
           <div
             className="rounded-full"

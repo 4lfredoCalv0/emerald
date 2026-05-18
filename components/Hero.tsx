@@ -47,7 +47,7 @@ export default function Hero() {
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
         >
           Llevamos tu negocio{" "}
-          <span className="gradient-text animate-gradient-x">al siguiente nivel</span>
+          <span className="gradient-text">al siguiente nivel</span>
         </motion.h1>
 
         <motion.p
@@ -90,18 +90,18 @@ export default function Hero() {
           <motion.div
             key={delay}
             className="absolute hidden lg:block"
-            style={{ top: "50%", left: "50%" }}
+            style={{ top: "50%", left: "50%", willChange: "transform" }}
             initial={{ opacity: 0, x: 0, y: 0 }}
             animate={{
-              opacity: [0, 0.8, 1, 1, 0.8, 0],
+              opacity: [0, 0.3, 0.8, 0.8, 0.3, 0],
               x: [0, x * 0.5, x, x * 0.8, x * 0.5, 0],
               y: [0, y * 0.5, y, y * 0.8, y * 0.5, 0],
             }}
             transition={{
-              duration: 6,
+              duration: 8,
               delay,
               repeat: Infinity,
-              repeatDelay: 4,
+              repeatDelay: 5,
               ease: "easeInOut",
             }}
           >

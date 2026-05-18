@@ -83,7 +83,7 @@ const itemVariants = {
 
 export default function Capabilities() {
   return (
-    <section id="capacidades" className="relative py-20 px-4">
+    <section id="capacidades" className="relative py-24 sm:py-32 px-4">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/[0.02] to-transparent" />
 
       <div className="max-w-7xl mx-auto relative">
@@ -97,10 +97,10 @@ export default function Capabilities() {
           <p className="text-xs font-medium text-emerald-400 uppercase tracking-widest mb-3">
             Capacidades
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
             Todo lo que necesitas para modernizar tu operación
           </h2>
-          <p className="mt-2 text-sm text-gray-500 max-w-xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg text-gray-500 max-w-2xl mx-auto">
             De la presencia online a la automatización con IA. Un solo ecosistema.
           </p>
         </motion.div>

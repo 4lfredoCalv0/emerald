@@ -8,9 +8,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["'Manrope'", "'Space Grotesk'", "sans-serif"],
+        heading: ["'Manrope'", "sans-serif"],
         body: ["'Inter'", "sans-serif"],
-        brand: ["'Manrope'", "'Space Grotesk'", "sans-serif"],
+        brand: ["'Manrope'", "sans-serif"],
       },
       colors: {
         brand: {

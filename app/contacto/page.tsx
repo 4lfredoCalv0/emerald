@@ -144,7 +144,7 @@ export default function ContactoPage() {
             className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight"
           >
             Hablemos de tu{" "}
-            <span className="gradient-text animate-gradient-x">negocio</span>
+            <span className="gradient-text">negocio</span>
           </motion.h1>
 
           <motion.p
@@ -346,9 +346,11 @@ export default function ContactoPage() {
                             } disabled:opacity-50`}
                             placeholder="Tu nombre"
                           />
-                          {errors.nombre && touched.nombre && (
-                            <p className="mt-1.5 text-xs text-red-400">{errors.nombre}</p>
-                          )}
+                          <div className="min-h-[1.25rem] mt-1.5">
+                            {errors.nombre && touched.nombre && (
+                              <p className="text-xs text-red-400">{errors.nombre}</p>
+                            )}
+                          </div>
                         </div>
                         <div>
                           <label
@@ -394,9 +396,11 @@ export default function ContactoPage() {
                             } disabled:opacity-50`}
                             placeholder="tu@email.com"
                           />
-                          {errors.email && touched.email && (
-                            <p className="mt-1.5 text-xs text-red-400">{errors.email}</p>
-                          )}
+                          <div className="min-h-[1.25rem] mt-1.5">
+                            {errors.email && touched.email && (
+                              <p className="text-xs text-red-400">{errors.email}</p>
+                            )}
+                          </div>
                         </div>
                         <div>
                           <label
@@ -465,9 +469,11 @@ export default function ContactoPage() {
                           } disabled:opacity-50`}
                           placeholder="Cuéntanos sobre tu negocio y qué te gustaría mejorar..."
                         />
-                        {errors.mensaje && touched.mensaje && (
-                          <p className="mt-1.5 text-xs text-red-400">{errors.mensaje}</p>
-                        )}
+                        <div className="min-h-[1.25rem] mt-1.5">
+                          {errors.mensaje && touched.mensaje && (
+                            <p className="text-xs text-red-400">{errors.mensaje}</p>
+                          )}
+                        </div>
                       </div>
 
                       <button

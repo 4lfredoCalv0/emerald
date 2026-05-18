@@ -42,7 +42,7 @@ export default function SobreEmeraldPage() {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
           >
             Conectando negocios tradicionales{" "}
-            <span className="gradient-text animate-gradient-x">con el futuro</span>
+            <span className="gradient-text">con el futuro</span>
           </motion.h1>
 
           <motion.p
