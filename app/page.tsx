@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, MessageSquare, Zap, Globe, BrainCircuit, Shield, TrendingUp, Users, Clock, Monitor, Smartphone, Bot, Cog, Workflow, Database, BarChart3 } from "lucide-react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DashboardMockup from "@/components/visuals/DashboardMockup";
@@ -19,6 +20,7 @@ const pillars = [
     icon: Globe,
     title: "Presencia Digital Premium",
     subtitle: "Modernización online completa",
+    href: "/soluciones/presencia-digital-premium",
     description:
       "Creamos sistemas digitales que transforman la forma en que tu negocio se presenta al mundo. Sitios web premium, landing pages de alto impacto y toda la infraestructura online que necesitas para competir hoy.",
     features: [
@@ -51,6 +53,7 @@ const pillars = [
     icon: MessageSquare,
     title: "Chatbots y WhatsApp IA",
     subtitle: "Comunicación inteligente 24/7",
+    href: "/soluciones/chatbots-whatsapp-ia",
     description:
       "Sistemas que atienden clientes, califican leads y agendan citas al instante por WhatsApp y web. Tu negocio responde siempre — cada mensaje se convierte en oportunidad.",
     features: [
@@ -83,6 +86,7 @@ const pillars = [
     icon: Cog,
     title: "Automatización Inteligente",
     subtitle: "Operaciones en piloto automático",
+    href: "/soluciones/automatizacion-inteligente",
     description:
       "Conectamos tus herramientas y automatizamos procesos: facturación, inventarios, CRM, marketing, seguimiento de clientes. Tu equipo se enfoca en lo importante, el sistema se encarga del resto.",
     features: [
@@ -275,9 +279,10 @@ export default function Home() {
                   transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
                   className="group"
                 >
-                  <div
-                    className={`relative h-full glass-card p-0 overflow-hidden transition-all duration-500 ${sol.hoverBorder} ${sol.hoverShadow} hover:shadow-2xl`}
-                  >
+                  <Link href={sol.href} className="block h-full">
+                    <div
+                      className={`relative h-full glass-card p-0 overflow-hidden transition-all duration-500 ${sol.hoverBorder} ${sol.hoverShadow} hover:shadow-2xl`}
+                    >
                     <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r ${sol.accentLine}`} />
                     <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${sol.gradient}/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:opacity-100 opacity-0 transition-opacity duration-700`} />
 
@@ -336,6 +341,7 @@ export default function Home() {
                       className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${sol.accentLine} origin-left`}
                     />
                   </div>
+                  </Link>
                 </motion.div>
               ))}
             </div>
