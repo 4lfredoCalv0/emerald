@@ -35,7 +35,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <nav aria-label="Breadcrumb" className="absolute top-20 lg:top-24 left-0 right-0 z-10">
+      <nav aria-label="Breadcrumb" className="absolute top-16 lg:top-24 left-0 right-0 z-10">
         <div className="max-w-7xl mx-auto px-4">
         <ol className="flex items-center gap-1.5 text-sm">
           {allItems.map((item, index) => (
