@@ -200,7 +200,7 @@ export function generateOrganizationSchema(): OrganizationSchema {
     },
     sameAs: [
       "https://www.linkedin.com/company/emerald-co",
-      "https://www.instagram.com/emerald.co",
+      "https://www.instagram.com/ia.emerald/",
       "https://twitter.com/emerald_co",
     ],
   };

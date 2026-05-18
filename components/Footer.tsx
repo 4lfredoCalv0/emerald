@@ -93,7 +93,9 @@ export default function Footer() {
               <motion.a
                 key={i}
                 aria-label={label}
-                href="#"
+                href="https://www.instagram.com/ia.emerald/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all"
                 whileHover={{ scale: 1.1, y: -3 }}
                 whileTap={{ scale: 0.95 }}
