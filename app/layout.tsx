@@ -66,6 +66,7 @@ export default function RootLayout({
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Barranquilla",
+                addressRegion: "Atlántico",
                 addressCountry: "CO",
               },
               contactPoint: {
@@ -75,6 +76,78 @@ export default function RootLayout({
                 availableLanguage: "Spanish",
               },
               sameAs: [],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "Emerald",
+              description:
+                "Agencia de modernización empresarial con IA. Presencia digital premium, chatbots WhatsApp IA y automatización inteligente para negocios en Barranquilla y Latinoamérica.",
+              url: BASE_URL,
+              logo: `${BASE_URL}/logomark.png`,
+              image: `${BASE_URL}/og-image.png`,
+              telephone: "+57-323-9168300",
+              email: "contactoemerald@proton.me",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Barranquilla",
+                addressRegion: "Atlántico",
+                addressCountry: "CO",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: "10.9639",
+                longitude: "-74.7964",
+              },
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "08:00",
+                closes: "18:00",
+              },
+              priceRange: "$$",
+              areaServed: {
+                "@type": "Country",
+                name: "Colombia",
+              },
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "Servicios de Modernización Digital",
+                itemListElement: [
+                  {
+                    "@type": "Offer",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: "Presencia Digital Premium",
+                      description: "Sitios web premium, landing pages y branding digital.",
+                      url: `${BASE_URL}/soluciones/presencia-digital-premium`,
+                    },
+                  },
+                  {
+                    "@type": "Offer",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: "Chatbots y WhatsApp IA",
+                      description: "Chatbots inteligentes para atención 24/7 y automatización de ventas.",
+                      url: `${BASE_URL}/soluciones/chatbots-whatsapp-ia`,
+                    },
+                  },
+                  {
+                    "@type": "Offer",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: "Automatización Inteligente",
+                      description: "Automatización de workflows, CRM e integraciones.",
+                      url: `${BASE_URL}/soluciones/automatizacion-inteligente`,
+                    },
+                  },
+                ],
+              },
             }),
           }}
         />

@@ -11,7 +11,6 @@ const footerLinks = {
   ],
   empresa: [
     { label: "Sobre Emerald", href: "/sobre-emerald" },
-    { label: "Transformaciones", href: "/transformaciones" },
     { label: "Blog", href: "/blog" },
     { label: "Contacto", href: "/contacto" },
   ],

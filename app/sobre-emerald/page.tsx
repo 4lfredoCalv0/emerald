@@ -2,12 +2,14 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Hexagon, ArrowRight, Lightbulb, Eye, Target, Sparkles, Cpu, Globe } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function SobreEmeraldPage() {
   return (
     <div className="relative">
+      <Breadcrumbs items={[{ label: "Sobre Emerald", href: "/sobre-emerald" }]} />
       {/* ==================== HERO ==================== */}
-      <section className="relative min-h-screen flex items-center justify-center pt-32 pb-16 px-4 overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center pt-4 pb-16 px-4 overflow-hidden">
         <HeroVisual />
 
         {/* Ambient orbs - static */}
