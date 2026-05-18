@@ -128,9 +128,9 @@ export default function ContactoPage() {
         <HeroVisual accentColor="emerald" type="waves" />
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 via-transparent to-transparent" />
 
-        <div className="relative max-w-4xl mx-auto w-full">
-          <Breadcrumbs items={[{ label: "Contacto", href: "/contacto" }]} />
-          <div className="text-center">
+        <Breadcrumbs items={[{ label: "Contacto", href: "/contacto" }]} />
+
+        <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,7 +159,6 @@ export default function ContactoPage() {
             Cuéntanos sobre tu negocio. Analizamos tu situación actual y
             diseñamos la estrategia de modernización que más te conviene.
           </motion.p>
-          </div>
         </div>
       </section>
 

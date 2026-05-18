@@ -25,9 +25,9 @@ export default function SobreEmeraldPage() {
           <div className="absolute top-[70%] left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/5 to-transparent" />
         </div>
 
-        <div className="relative max-w-4xl mx-auto w-full">
-          <Breadcrumbs items={[{ label: "Sobre Emerald", href: "/sobre-emerald" }]} />
-          <div className="text-center">
+        <Breadcrumbs items={[{ label: "Sobre Emerald", href: "/sobre-emerald" }]} />
+
+        <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -68,7 +68,6 @@ export default function SobreEmeraldPage() {
             <MapPin className="w-3.5 h-3.5 text-emerald-400" />
             <span>Barranquilla, Colombia</span>
           </motion.div>
-          </div>
         </div>
       </section>
 

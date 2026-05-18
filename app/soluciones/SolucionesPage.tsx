@@ -249,9 +249,9 @@ export default function SolucionesPage() {
           <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
         </div>
 
-        <div className="relative max-w-5xl mx-auto w-full">
-          <Breadcrumbs items={[{ label: "Soluciones", href: "/soluciones" }]} />
-          <div className="text-center">
+        <Breadcrumbs items={[{ label: "Soluciones", href: "/soluciones" }]} />
+
+        <div className="relative max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -293,7 +293,6 @@ export default function SolucionesPage() {
             <div className="w-2 h-2 rounded-full bg-emerald-400" />
             <div className="w-16 h-px bg-emerald-500/20" />
           </motion.div>
-          </div>
         </div>
       </section>
 
