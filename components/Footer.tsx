@@ -44,7 +44,7 @@ export default function Footer() {
               whileHover={{ scale: 1.02 }}
             >
               <img
-                src="/logomark.png"
+                src="/LogoEmeraldNBG.png"
                 alt="Emerald"
                 className="w-8 h-8"
                 loading="lazy"

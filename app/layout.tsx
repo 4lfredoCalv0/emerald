@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark">
       <head>
-        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="icon" type="image/png" href="/LogoEmeraldNBG.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -60,7 +60,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Emerald",
               url: BASE_URL,
-              logo: `${BASE_URL}/logomark.png`,
+              logo: `${BASE_URL}/LogoEmeraldNBG.png`,
               description:
                 "Transformamos negocios tradicionales en empresas modernas e inteligentes mediante presencia digital premium, chatbots IA, automatización y sistemas operativos.",
               address: {
@@ -89,7 +89,7 @@ export default function RootLayout({
               description:
                 "Agencia de modernización empresarial con IA. Presencia digital premium, chatbots WhatsApp IA y automatización inteligente para negocios en Barranquilla y Latinoamérica.",
               url: BASE_URL,
-              logo: `${BASE_URL}/logomark.png`,
+              logo: `${BASE_URL}/LogoEmeraldNBG.png`,
               image: `${BASE_URL}/og-image.png`,
               telephone: "+57-323-9168300",
               email: "contactoemerald@proton.me",

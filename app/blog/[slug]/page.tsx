@@ -90,7 +90,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
       url: BASE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${BASE_URL}/logomark.png`,
+        url: `${BASE_URL}/LogoEmeraldNBG.png`,
       },
     },
     mainEntityOfPage: {
