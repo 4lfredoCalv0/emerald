@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, MessageSquare, Zap, Globe, BrainCircuit, Shield, TrendingUp, Users, Clock } from "lucide-react";
+import { ArrowRight, Calendar, MessageSquare, Zap, Globe, BrainCircuit, Shield, TrendingUp, Users, Clock, Monitor, Smartphone, Bot, Cog, Workflow, Database, BarChart3 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { DashboardMockup } from "@/components/visuals";
@@ -112,20 +112,98 @@ const pillars = [
   {
     icon: Globe,
     title: "Presencia Digital Premium",
-    description: "Sitios web de alto impacto, landing pages y toda la infraestructura online que tu negocio necesita para competir hoy.",
-    features: ["Sitios web premium", "Landing pages de conversión", "Branding digital"],
+    subtitle: "Modernización online completa",
+    description:
+      "Creamos sistemas digitales que transforman la forma en que tu negocio se presenta al mundo. Sitios web premium, landing pages de alto impacto y toda la infraestructura online que necesitas para competir hoy.",
+    features: [
+      "Sitios web premium de alto impacto",
+      "Landing pages enfocadas en conversión",
+      "Branding y diseño de marca digital",
+      "Infraestructura online completa",
+      "Presencia 24/7 en internet",
+    ],
+    visualFeatures: [
+      { icon: Monitor, label: "Sitio Web" },
+      { icon: Smartphone, label: "Responsive" },
+      { icon: TrendingUp, label: "SEO" },
+    ],
+    gradient: "from-emerald-400 to-emerald-600",
+    accentColor: "emerald" as const,
+    dotColor: "bg-emerald-400",
+    tagText: "text-emerald-400",
+    tagBg: "bg-emerald-500/10",
+    tagBorder: "border-emerald-500/20",
+    iconBg: "from-emerald-400/20 to-emerald-600/10",
+    iconBorder: "border-emerald-500/30",
+    iconColor: "text-emerald-400",
+    accentLine: "from-emerald-500/0 via-emerald-500 to-emerald-500/0",
+    hoverBorder: "hover:border-emerald-500/30",
+    hoverShadow: "hover:shadow-emerald-500/10",
+    ctaText: "text-emerald-400",
   },
   {
     icon: MessageSquare,
     title: "Chatbots y WhatsApp IA",
-    description: "Sistemas que atienden clientes, califican leads y agendan citas al instante. Tu negocio responde siempre.",
-    features: ["Atención automática 24/7", "Calificación de leads", "Agenda inteligente"],
+    subtitle: "Comunicación inteligente 24/7",
+    description:
+      "Sistemas que atienden clientes, califican leads y agendan citas al instante por WhatsApp y web. Tu negocio responde siempre — cada mensaje se convierte en oportunidad.",
+    features: [
+      "Atención automática por WhatsApp",
+      "Calificación inteligente de leads",
+      "Agenda de citas automatizada",
+      "Respuestas inteligentes 24/7",
+      "Integración con CRM",
+    ],
+    visualFeatures: [
+      { icon: Bot, label: "IA" },
+      { icon: Calendar, label: "Agenda" },
+      { icon: BrainCircuit, label: "Smart" },
+    ],
+    gradient: "from-blue-400 to-cyan-500",
+    accentColor: "blue" as const,
+    dotColor: "bg-blue-400",
+    tagText: "text-blue-400",
+    tagBg: "bg-blue-500/10",
+    tagBorder: "border-blue-500/20",
+    iconBg: "from-blue-400/20 to-cyan-400/10",
+    iconBorder: "border-blue-500/30",
+    iconColor: "text-blue-400",
+    accentLine: "from-blue-500/0 via-blue-500 to-blue-500/0",
+    hoverBorder: "hover:border-blue-500/30",
+    hoverShadow: "hover:shadow-blue-500/10",
+    ctaText: "text-blue-400",
   },
   {
-    icon: BrainCircuit,
+    icon: Cog,
     title: "Automatización Inteligente",
-    description: "Conectamos tus herramientas y automatizamos procesos: facturación, inventarios, CRM, marketing y más.",
-    features: ["Workflows automatizados", "CRM integrado", "Dashboards en tiempo real"],
+    subtitle: "Operaciones en piloto automático",
+    description:
+      "Conectamos tus herramientas y automatizamos procesos: facturación, inventarios, CRM, marketing, seguimiento de clientes. Tu equipo se enfoca en lo importante, el sistema se encarga del resto.",
+    features: [
+      "Automatización de workflows",
+      "CRM inteligente integrado",
+      "Integraciones con herramientas",
+      "Dashboards en tiempo real",
+      "Optimización operativa continua",
+    ],
+    visualFeatures: [
+      { icon: Workflow, label: "Flows" },
+      { icon: Database, label: "CRM" },
+      { icon: BarChart3, label: "Data" },
+    ],
+    gradient: "from-purple-400 to-pink-500",
+    accentColor: "purple" as const,
+    dotColor: "bg-purple-400",
+    tagText: "text-purple-400",
+    tagBg: "bg-purple-500/10",
+    tagBorder: "border-purple-500/20",
+    iconBg: "from-purple-400/20 to-pink-400/10",
+    iconBorder: "border-purple-500/30",
+    iconColor: "text-purple-400",
+    accentLine: "from-purple-500/0 via-purple-500 to-purple-500/0",
+    hoverBorder: "hover:border-purple-500/30",
+    hoverShadow: "hover:shadow-purple-500/10",
+    ctaText: "text-purple-400",
   },
 ];
 
@@ -233,12 +311,12 @@ export default function Home() {
                     <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                   </motion.a>
                   <motion.a
-                    href="/soluciones"
+                    href="/beneficios"
                     className="inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-gray-300 border border-white/10 rounded-full hover:border-emerald-500/50 hover:text-emerald-300 transition-all"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Ver soluciones
+                    Ver beneficios
                   </motion.a>
                 </motion.div>
               </div>
@@ -257,50 +335,101 @@ export default function Home() {
         </section>
 
         {/* ===== PILLARS ===== */}
-        <section className="relative py-24 sm:py-32 px-4">
-          <div className="max-w-7xl mx-auto">
+        <section className="relative py-24 sm:py-32 px-4 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/[0.02] to-transparent" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-emerald-500/5 blur-3xl" />
+          <div className="max-w-7xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-16 sm:mb-20"
             >
               <p className="text-xs font-medium text-emerald-400 uppercase tracking-widest mb-3">
                 Soluciones
               </p>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-                Tres pilares para{" "}
-                <span className="gradient-text">modernizar tu negocio</span>
+                Transformamos tu negocio{" "}
+                <span className="gradient-text">desde la raíz</span>
               </h2>
               <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
-                Presencia digital, comunicación inteligente y automatización. Todo lo que necesitas en un solo ecosistema.
+                Presencia digital premium, comunicación inteligente y automatización.
+                Tres pilares para que tu negocio opere al nivel que merece.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {pillars.map((pillar, i) => (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+              {pillars.map((sol, index) => (
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="group glass-card p-8 hover:border-emerald-500/20 transition-all duration-500"
+                  transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  className="group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400/10 to-emerald-600/10 border border-emerald-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <pillar.icon className="w-6 h-6 text-emerald-400" />
+                  <div
+                    className={`relative h-full glass-card p-0 overflow-hidden transition-all duration-500 ${sol.hoverBorder} ${sol.hoverShadow} hover:shadow-2xl`}
+                  >
+                    <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r ${sol.accentLine}`} />
+                    <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${sol.gradient}/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:opacity-100 opacity-0 transition-opacity duration-700`} />
+
+                    <div className="relative p-8 sm:p-10">
+                      <div className="flex items-start justify-between mb-6">
+                        <motion.div
+                          initial={{ rotate: 0 }}
+                          whileHover={{ rotate: [0, -10, 10, -5, 0] }}
+                          transition={{ duration: 0.5 }}
+                          className={`w-14 h-14 rounded-xl bg-gradient-to-br ${sol.iconBg} ${sol.iconBorder} border flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}
+                        >
+                          <sol.icon className={`w-7 h-7 ${sol.iconColor}`} />
+                        </motion.div>
+
+                        <div className="flex gap-1.5">
+                          {sol.visualFeatures.map((vf, i) => (
+                            <div
+                              key={i}
+                              className={`w-8 h-8 rounded-lg ${sol.tagBg} ${sol.tagBorder} border flex items-center justify-center`}
+                            >
+                              <vf.icon className={`w-3.5 h-3.5 ${sol.iconColor}`} />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <p className={`text-xs font-medium ${sol.tagText} uppercase tracking-wider mb-2`}>
+                        {sol.subtitle}
+                      </p>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 leading-tight">
+                        {sol.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 leading-relaxed mb-8">
+                        {sol.description}
+                      </p>
+
+                      <div className="space-y-3 mb-8">
+                        {sol.features.map((feature, i) => (
+                          <div key={i} className="flex items-center gap-3 text-sm text-gray-300">
+                            <div className={`w-1.5 h-1.5 rounded-full ${sol.dotColor} shrink-0`} />
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className={`flex items-center gap-2 text-sm ${sol.ctaText} font-medium`}>
+                        <span>Explorar solución</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </div>
+                    </div>
+
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.4 }}
+                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${sol.accentLine} origin-left`}
+                    />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{pillar.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-6">{pillar.description}</p>
-                  <ul className="space-y-2">
-                    {pillar.features.map((feature, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-gray-300">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
                 </motion.div>
               ))}
             </div>
