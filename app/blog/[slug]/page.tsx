@@ -8,6 +8,8 @@ import { unified } from "unified";
 import { getAllPosts, getPostBySlug, BlogPostMeta } from "@/lib/blog";
 import ArticleClient from "./ArticleClient";
 
+const BASE_URL = "https://emerald-co.vercel.app";
+
 export async function generateStaticParams() {
   const posts = getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));
@@ -17,15 +19,35 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const post = getPostBySlug(params.slug);
   if (!post) return { title: "Artículo no encontrado — Emerald" };
 
+  const postUrl = `${BASE_URL}/blog/${params.slug}`;
+
   return {
     title: `${post.title} — Blog Emerald`,
     description: post.description,
+    alternates: {
+      canonical: postUrl,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
       publishedTime: post.date,
       authors: ["Emerald"],
+      url: postUrl,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: ["/og-image.png"],
     },
   };
 }
@@ -51,11 +73,43 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 2);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: {
+      "@type": "Organization",
+      name: "Emerald",
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Emerald",
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/logomark.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${BASE_URL}/blog/${post.slug}`,
+    },
+  };
+
   return (
-    <ArticleClient
-      post={post}
-      htmlContent={htmlContent}
-      relatedPosts={relatedPosts}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <ArticleClient
+        post={post}
+        htmlContent={htmlContent}
+        relatedPosts={relatedPosts}
+      />
+    </>
   );
 }
