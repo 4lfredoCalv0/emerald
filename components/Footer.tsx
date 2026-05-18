@@ -63,17 +63,10 @@ export default function Footer() {
 
             <p className="text-sm text-gray-400 mb-6 max-w-sm leading-relaxed">
               Modernizamos negocios con presencia digital premium, automatización
-              y sistemas que trabajan por ti. Barranquilla, Colombia.
+              y sistemas que trabajan por ti.
             </p>
 
             <div className="space-y-3">
-              <motion.div
-                className="flex items-center gap-2 text-sm text-gray-400"
-                whileHover={{ x: 3 }}
-              >
-                <MapPin className="w-4 h-4 text-emerald-400" />
-                <span>Barranquilla, Colombia</span>
-              </motion.div>
               <motion.div
                 className="flex items-center gap-2 text-sm text-gray-400"
                 whileHover={{ x: 3 }}
@@ -104,8 +97,6 @@ export default function Footer() {
 
             <div className="flex items-center gap-4 mt-6">
               {[
-                { Icon: Github, label: "GitHub" },
-                { Icon: Linkedin, label: "LinkedIn" },
                 { Icon: Instagram, label: "Instagram" },
               ].map(({ Icon, label }, i) => (
               <motion.a
@@ -163,16 +154,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Emerald. Todos los derechos
             reservados.
           </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-sm text-gray-500"
-          >
-            Hecho con{" "}
-            <span className="text-emerald-400 inline-block">&hearts;</span>{" "}
-            en Barranquilla, Colombia
-          </motion.p>
+          <div />
         </div>
       </div>
 
