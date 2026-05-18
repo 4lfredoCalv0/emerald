@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
   Globe,
   Monitor,
@@ -37,7 +38,10 @@ import ProcessSteps from "@/components/solutions/ProcessSteps";
 import IndustryFit from "@/components/solutions/IndustryFit";
 import SolutionCTA from "@/components/solutions/SolutionCTA";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { ComparisonMockup, HeroVisual } from "@/components/visuals";
+import HeroVisual from "@/components/visuals/HeroVisual";
+const ComparisonMockup = dynamic(() => import("@/components/visuals/ComparisonMockup"), {
+  loading: () => <div className="h-80 bg-gray-900/50 animate-pulse rounded-xl" />,
+});
 
 export default function PresenciaDigitalPage() {
   return (

@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 
@@ -33,7 +34,7 @@ const colorMap = {
   },
 };
 
-export default function IndustryFit({
+export default memo(function IndustryFit({
   industries,
   accentColor,
   title,
@@ -94,4 +95,4 @@ export default function IndustryFit({
       </div>
     </section>
   );
-}
+});

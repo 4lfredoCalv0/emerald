@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, LucideIcon } from "lucide-react";
@@ -49,7 +50,7 @@ const colorMap = {
   },
 };
 
-export default function SolutionHero({
+export default memo(function SolutionHero({
   icon: Icon,
   badge,
   title,
@@ -151,4 +152,4 @@ export default function SolutionHero({
       </div>
     </section>
   );
-}
+});

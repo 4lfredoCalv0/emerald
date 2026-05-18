@@ -15,7 +15,7 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
-import { HeroVisual } from "@/components/visuals";
+import HeroVisual from "@/components/visuals/HeroVisual";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { submitAgendaForm } from "@/app/actions";
 

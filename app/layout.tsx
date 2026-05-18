@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
+import { AnalyticsWrapper } from "@/components/AnalyticsWrapper";
 import "./globals.css";
 
 const BASE_URL = "https://emerald-co.vercel.app";
@@ -47,7 +47,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
           rel="stylesheet"
@@ -154,7 +154,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-gray-950 text-gray-100">
         {children}
-        <Analytics />
+        <AnalyticsWrapper />
       </body>
     </html>
   );

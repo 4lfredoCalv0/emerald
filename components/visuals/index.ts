@@ -1,9 +1,0 @@
-export { default as DashboardMockup } from "./DashboardMockup";
-export { default as SystemDiagram } from "./SystemDiagram";
-export { default as WorkflowVisual } from "./WorkflowVisual";
-export { default as CommunicationFlow } from "./CommunicationFlow";
-export { default as HeroVisual } from "./HeroVisual";
-export { default as DataFlow } from "./DataFlow";
-export { default as ComparisonMockup } from "./ComparisonMockup";
-export { default as DataFlowVisual } from "./DataFlowVisual";
-export { default as BusinessDashboard } from "./BusinessDashboard";

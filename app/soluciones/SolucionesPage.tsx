@@ -22,8 +22,9 @@ import {
   Clock,
   Shield,
 } from "lucide-react";
-import { HeroVisual } from "@/components/visuals";
+import HeroVisual from "@/components/visuals/HeroVisual";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { containerVariants, itemVariants } from "@/lib/animation-variants";
 
 const soluciones = [
   {
@@ -93,23 +94,6 @@ const soluciones = [
     href: "/soluciones/automatizacion-inteligente",
   },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  },
-};
 
 function SolutionCard({ sol, index }: { sol: typeof soluciones[0]; index: number }) {
   const colorMap = {

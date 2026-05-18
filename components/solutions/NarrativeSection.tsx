@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
@@ -38,7 +39,7 @@ const colorMap = {
   },
 };
 
-export default function NarrativeSection({
+export default memo(function NarrativeSection({
   items,
   accentColor,
   title,
@@ -101,4 +102,4 @@ export default function NarrativeSection({
       </div>
     </section>
   );
-}
+});

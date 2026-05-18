@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 
@@ -39,7 +40,7 @@ const colorMap = {
   },
 };
 
-export default function TransformationSection({
+export default memo(function TransformationSection({
   accentColor,
   title,
   subtitle,
@@ -142,4 +143,4 @@ export default function TransformationSection({
       </div>
     </section>
   );
-}
+});

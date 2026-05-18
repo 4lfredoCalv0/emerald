@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { containerVariants, itemVariants } from "@/lib/animation-variants";
 import {
   Globe,
   MessageCircle,
@@ -47,23 +48,6 @@ const transformations = [
       "Tus herramientas trabajan juntas. Ventas, marketing, atenci\u00f3n al cliente y operaciones sincronizados en un ecosistema digital inteligente.",
   },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
 
 export default function Benefits() {
   return (

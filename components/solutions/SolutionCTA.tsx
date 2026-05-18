@@ -1,9 +1,9 @@
 "use client";
 
+import { memo, ReactNode } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ReactNode } from "react";
 
 interface SolutionCTAProps {
   accentColor: "emerald" | "blue" | "purple";
@@ -27,7 +27,7 @@ const colorMap = {
   },
 };
 
-export default function SolutionCTA({
+export default memo(function SolutionCTA({
   accentColor,
   title,
   description,
@@ -83,4 +83,4 @@ export default function SolutionCTA({
       </div>
     </section>
   );
-}
+});

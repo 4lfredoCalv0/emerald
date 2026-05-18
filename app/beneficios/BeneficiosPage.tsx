@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
   Globe,
   MessageSquare,
@@ -14,25 +15,15 @@ import {
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
-import { SystemDiagram, HeroVisual, BusinessDashboard } from "@/components/visuals";
+import HeroVisual from "@/components/visuals/HeroVisual";
+import { containerVariants, itemVariants } from "@/lib/animation-variants";
+const SystemDiagram = dynamic(() => import("@/components/visuals/SystemDiagram"), {
+  loading: () => <div className="h-64 bg-gray-900/50 animate-pulse rounded-xl" />,
+});
+const BusinessDashboard = dynamic(() => import("@/components/visuals/BusinessDashboard"), {
+  loading: () => <div className="h-96 bg-gray-900/50 animate-pulse rounded-xl" />,
+});
 import Breadcrumbs from "@/components/Breadcrumbs";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
 
 export default function BeneficiosPage() {
   return (

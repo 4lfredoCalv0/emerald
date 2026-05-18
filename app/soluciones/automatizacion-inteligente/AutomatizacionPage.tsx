@@ -39,7 +39,8 @@ import ProcessSteps from "@/components/solutions/ProcessSteps";
 import IndustryFit from "@/components/solutions/IndustryFit";
 import SolutionCTA from "@/components/solutions/SolutionCTA";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { WorkflowVisual, DataFlow } from "@/components/visuals";
+import WorkflowVisual from "@/components/visuals/WorkflowVisual";
+import DataFlow from "@/components/visuals/DataFlow";
 
 export default function AutomatizacionPage() {
   return (

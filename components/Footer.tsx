@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, MapPin, Github, Linkedin, Instagram, ArrowUp, MessageSquare } from "lucide-react";
+import { columnVariants } from "@/lib/animation-variants";
 
 const footerLinks = {
   soluciones: [
@@ -18,15 +19,6 @@ const footerLinks = {
     { label: "Términos y Condiciones", href: "/terminos-condiciones" },
     { label: "Política de Privacidad", href: "/politica-privacidad" },
   ],
-};
-
-const columnVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" },
-  }),
 };
 
 const scrollToTop = () => {

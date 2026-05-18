@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock, ArrowRight, Tag } from "lucide-react";
 import { BlogPostMeta } from "@/lib/blog";
-import { HeroVisual } from "@/components/visuals";
+import HeroVisual from "@/components/visuals/HeroVisual";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 function formatDate(dateStr: string) {

@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
@@ -48,7 +49,7 @@ const colorMap = {
   },
 };
 
-export default function FeatureShowcase({
+export default memo(function FeatureShowcase({
   features,
   accentColor,
   title,
@@ -118,4 +119,4 @@ export default function FeatureShowcase({
       </div>
     </section>
   );
-}
+});

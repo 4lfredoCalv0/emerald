@@ -41,7 +41,8 @@ import ProcessSteps from "@/components/solutions/ProcessSteps";
 import IndustryFit from "@/components/solutions/IndustryFit";
 import SolutionCTA from "@/components/solutions/SolutionCTA";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { CommunicationFlow, WorkflowVisual } from "@/components/visuals";
+import CommunicationFlow from "@/components/visuals/CommunicationFlow";
+import WorkflowVisual from "@/components/visuals/WorkflowVisual";
 
 export default function ChatbotsPage() {
   return (

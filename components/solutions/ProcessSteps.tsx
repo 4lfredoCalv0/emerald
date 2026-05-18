@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
@@ -48,7 +49,7 @@ const colorMap = {
   },
 };
 
-export default function ProcessSteps({
+export default memo(function ProcessSteps({
   steps,
   accentColor,
   title,
@@ -124,4 +125,4 @@ export default function ProcessSteps({
       </div>
     </section>
   );
-}
+});

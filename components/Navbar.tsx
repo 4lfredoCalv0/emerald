@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe, MessageSquare, Cog, ChevronDown } from "lucide-react";
+import { linkVariants, dropdownVariants } from "@/lib/animation-variants";
 
 const navLinks = [
   { label: "Beneficios", href: "/beneficios" },
@@ -31,31 +32,6 @@ const soluciones = [
   },
 ];
 
-const linkVariants = {
-  hidden: { opacity: 0, y: -10 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: 0.4 + i * 0.08, duration: 0.5, ease: "easeOut" },
-  }),
-};
-
-const dropdownVariants = {
-  hidden: { opacity: 0, y: -8, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] },
-  },
-  exit: {
-    opacity: 0,
-    y: -8,
-    scale: 0.96,
-    transition: { duration: 0.15, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -63,8 +39,17 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
