@@ -15,7 +15,7 @@ export interface PageMeta {
 
 export function generatePageMetadata(meta: PageMeta): Metadata {
   const url = meta.path ? `${BASE_URL}${meta.path}` : BASE_URL;
-  const imageUrl = meta.image || "/og-image.png";
+  const imageUrl = meta.image || "/opengraph-image";
   const imageAlt = meta.imageAlt || meta.title;
 
   return {
@@ -68,7 +68,7 @@ export const defaultMetadata: Metadata = {
     siteName: "Emerald",
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Emerald — Modernización Empresarial con IA",
@@ -80,7 +80,7 @@ export const defaultMetadata: Metadata = {
     title: "Emerald | Modernización Empresarial con IA",
     description:
       "Llevamos negocios tradicionales a la era digital con infraestructura inteligente y sistemas modernos.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
 };
 
@@ -104,7 +104,7 @@ export const blogMetadata: Metadata = {
     locale: "es_CO",
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Blog Emerald — Modernización Digital e IA",
@@ -116,6 +116,6 @@ export const blogMetadata: Metadata = {
     title: "Blog | Modernización Digital e IA — Emerald",
     description:
       "Artículos sobre automatización, IA y transformación digital para negocios que quieren evolucionar.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
 };

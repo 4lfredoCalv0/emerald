@@ -81,9 +81,8 @@ export interface WebSiteSchema {
     "@id": string;
   };
   potentialAction: {
-    "@type": "SearchAction";
+    "@type": "ReadAction";
     target: string;
-    "query-input": string;
   };
 }
 
@@ -183,7 +182,7 @@ export function generateOrganizationSchema(): OrganizationSchema {
     "@id": `${BASE_URL}/#organization`,
     name: "Emerald",
     url: BASE_URL,
-    logo: `${BASE_URL}/LogoEmeraldNBG.png`,
+    logo: `${BASE_URL}/LogoCyber.webp`,
     description:
       "Transformamos negocios tradicionales en empresas modernas e inteligentes mediante presencia digital premium, chatbots IA, automatización y sistemas operativos.",
     address: {
@@ -215,8 +214,8 @@ export function generateLocalBusinessSchema(): LocalBusinessSchema {
     description:
       "Agencia de modernización empresarial con IA. Presencia digital premium, chatbots WhatsApp IA y automatización inteligente para negocios en Barranquilla y Latinoamérica.",
     url: BASE_URL,
-    logo: `${BASE_URL}/LogoEmeraldNBG.png`,
-    image: `${BASE_URL}/og-image.png`,
+    logo: `${BASE_URL}/LogoCyber.webp`,
+    image: `${BASE_URL}/opengraph-image`,
     telephone: "+57-323-9168300",
     email: "contactoemerald@proton.me",
     address: {
@@ -288,9 +287,8 @@ export function generateWebSiteSchema(): WebSiteSchema {
       "@id": `${BASE_URL}/#organization`,
     },
     potentialAction: {
-      "@type": "SearchAction",
-      target: `${BASE_URL}/blog?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
+      "@type": "ReadAction",
+      target: `${BASE_URL}/blog`,
     },
   };
 }
@@ -353,7 +351,7 @@ export function generateArticleSchema(options: {
     description: options.description,
     datePublished: options.datePublished,
     dateModified: options.dateModified,
-    image: options.image || `${BASE_URL}/og-image.png`,
+    image: options.image || `${BASE_URL}/opengraph-image`,
     keywords: options.keywords,
     author: {
       "@type": "Organization",
@@ -367,7 +365,7 @@ export function generateArticleSchema(options: {
       url: BASE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${BASE_URL}/LogoEmeraldNBG.png`,
+        url: `${BASE_URL}/LogoCyber.webp`,
       },
     },
     mainEntityOfPage: {

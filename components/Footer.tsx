@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Github, Linkedin, Instagram, ArrowUp, MessageSquare } from "lucide-react";
-import { columnVariants } from "@/lib/animation-variants";
+import { Mail, MessageSquare, ArrowUp, Instagram } from "lucide-react";
 
 const footerLinks = {
   soluciones: [
-    { label: "Presencia Digital Premium", href: "/soluciones/presencia-digital-premium" },
-    { label: "Chatbots y WhatsApp IA", href: "/soluciones/chatbots-whatsapp-ia" },
-    { label: "Automatización Inteligente", href: "/soluciones/automatizacion-inteligente" },
+    { label: "Presencia Digital", href: "/soluciones/presencia-digital-premium" },
+    { label: "Chatbots WhatsApp IA", href: "/soluciones/chatbots-whatsapp-ia" },
+    { label: "Automatización", href: "/soluciones/automatizacion-inteligente" },
   ],
   empresa: [
     { label: "Sobre Emerald", href: "/sobre-emerald" },
@@ -16,166 +15,89 @@ const footerLinks = {
     { label: "Contacto", href: "/contacto" },
   ],
   legal: [
-    { label: "Términos y Condiciones", href: "/terminos-condiciones" },
-    { label: "Política de Privacidad", href: "/politica-privacidad" },
+    { label: "Términos", href: "/terminos-condiciones" },
+    { label: "Privacidad", href: "/politica-privacidad" },
   ],
 };
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/5 bg-gray-950/50">
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
-          <motion.div
-            custom={0}
-            variants={columnVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="lg:col-span-2"
-          >
-            <motion.a
-              href="#"
-              className="flex items-center gap-2.5 mb-4"
-              whileHover={{ scale: 1.02 }}
-            >
-              <img
-                src="/LogoEmeraldNBG.png"
-                alt="Emerald"
-                className="w-8 h-8"
-                loading="lazy"
-              />
-              <span className="text-xl font-semibold text-white lowercase font-brand tracking-wide">emerald</span>
-            </motion.a>
-
-            <p className="text-sm text-gray-400 mb-6 max-w-sm leading-relaxed">
-              Modernizamos negocios con presencia digital premium, automatización
-              y sistemas que trabajan por ti.
+    <footer className="relative bg-black border-t border-white/[0.05]">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+          {/* BRAND */}
+          <div className="col-span-2">
+            <a href="/" className="flex items-center gap-3 mb-4">
+              <img src="/LogoCyber.webp" alt="Emerald" className="w-8 h-8" />
+              <span className="text-xl font-bold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>EMERALD</span>
+            </a>
+            <p className="text-sm text-gray-500 mb-6 max-w-xs">
+              AI-First company. Modernización empresarial con inteligencia artificial.
             </p>
-
-            <div className="space-y-3">
-              <motion.div
-                className="flex items-center gap-2 text-sm text-gray-400"
-                whileHover={{ x: 3 }}
-              >
-                <Mail className="w-4 h-4 text-emerald-400" />
-                <a
-                  href="mailto:contactoemerald@proton.me"
-                  className="hover:text-emerald-400 transition-colors"
-                >
-                  contactoemerald@proton.me
-                </a>
-              </motion.div>
-              <motion.div
-                className="flex items-center gap-2 text-sm text-gray-400"
-                whileHover={{ x: 3 }}
-              >
-                <MessageSquare className="w-4 h-4 text-emerald-400" />
-                <a
-                  href="https://wa.me/573239168300"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-emerald-400 transition-colors"
-                >
-                  +57 323 9168300
-                </a>
-              </motion.div>
+            <div className="flex flex-col gap-2">
+              <a href="mailto:contactoemerald@proton.me" className="text-sm text-gray-400 hover:text-[#10b981] break-all">contactoemerald@proton.me</a>
+              <a href="https://wa.me/573239168300" className="text-sm text-gray-400 hover:text-[#10b981]">+57 323 9168300</a>
             </div>
-
-            <div className="flex items-center gap-4 mt-6">
-              {[
-                { Icon: Instagram, label: "Instagram" },
-              ].map(({ Icon, label }, i) => (
-              <motion.a
-                key={i}
-                aria-label={label}
-                href="https://www.instagram.com/ia.emerald/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all"
-                whileHover={{ scale: 1.1, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                  <Icon className="w-4 h-4" />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-
-          {Object.entries(footerLinks).map(([key, links], colIndex) => (
-            <motion.div
-              key={key}
-              custom={colIndex + 1}
-              variants={columnVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <a 
+              href="https://www.instagram.com/ia.emerald/" 
+              target="_blank"
+              className="inline-flex items-center gap-2 mt-4 text-gray-400 hover:text-[#10b981]"
             >
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                {key === "soluciones" ? "Soluciones" : key === "empresa" ? "Empresa" : "Legal"}
+              <Instagram className="w-4 h-4" /> @ia.emerald
+            </a>
+          </div>
+
+          {/* LINKS */}
+          {Object.entries(footerLinks).map(([key, links]) => (
+            <div key={key}>
+              <h3 className="text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] mb-4">
+                {key === "soluciones" ? "SOLUCIONES" : key === "empresa" ? "EMPRESA" : "LEGAL"}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {links.map((link, i) => (
-                  <li
-                    key={i}
-                  >
-                    <a
-                      href={link.href}
-                      className="text-sm text-gray-400 hover:text-emerald-400 transition-colors"
-                    >
+                  <li key={i}>
+                    <a href={link.href} className="text-sm text-gray-500 hover:text-white transition-colors">
                       {link.label}
                     </a>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </div>
 
-      <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-sm text-gray-500"
-          >
-            &copy; {new Date().getFullYear()} Emerald. Todos los derechos
-            reservados.
-          </motion.p>
-          <div />
+        <div className="mt-12 pt-8 border-t border-white/[0.03] flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-gray-600">© {new Date().getFullYear()} Emerald. Todos los derechos.</p>
         </div>
       </div>
 
+      {/* SCROLL TOP */}
       <motion.button
         onClick={scrollToTop}
-        aria-label="Volver arriba"
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        whileHover={{ scale: 1.1, y: -2 }}
+        className="fixed bottom-8 right-8 z-40 w-12 h-12 flex items-center justify-center text-black"
+        style={{
+          background: "#00FF66",
+          clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))",
+        }}
+        whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(16,185,129,0.5)" }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg shadow-emerald-500/25 flex items-center justify-center text-white"
       >
         <ArrowUp className="w-5 h-5" />
       </motion.button>
 
-      {/* WhatsApp floating button */}
+      {/* WHATSAPP */}
       <motion.a
         href="https://wa.me/573239168300"
         target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Contactar por WhatsApp"
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        whileHover={{ scale: 1.1, y: -2 }}
+        className="fixed bottom-8 left-8 z-40 w-12 h-12 flex items-center justify-center text-black"
+        style={{
+          background: "#00FF66",
+          clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))",
+        }}
+        whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(16,185,129,0.5)" }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-8 left-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg shadow-emerald-500/25 flex items-center justify-center text-white"
       >
         <MessageSquare className="w-5 h-5" />
       </motion.a>

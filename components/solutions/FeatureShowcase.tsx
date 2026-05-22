@@ -3,6 +3,8 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
+import { staggerContainer, fadeUpSpring, scaleInSpring, SPRING_SNAPPY } from "@/lib/animation-variants";
+import { MaskLine, TiltCard } from "@/components/motion/MotionPrimitives";
 
 interface Feature {
   icon: LucideIcon;
@@ -20,33 +22,15 @@ interface FeatureShowcaseProps {
 }
 
 const colorMap = {
-  emerald: {
-    iconBg: "from-emerald-400/10 to-emerald-600/10",
-    iconBorder: "border-emerald-500/10",
-    iconColor: "text-emerald-400",
-    hoverBorder: "hover:border-emerald-500/20",
-    tagBg: "bg-emerald-500/10",
-    tagText: "text-emerald-400",
-    tagBorder: "border-emerald-500/20",
-  },
-  blue: {
-    iconBg: "from-blue-400/10 to-cyan-400/10",
-    iconBorder: "border-blue-500/10",
-    iconColor: "text-blue-400",
-    hoverBorder: "hover:border-blue-500/20",
-    tagBg: "bg-blue-500/10",
-    tagText: "text-blue-400",
-    tagBorder: "border-blue-500/20",
-  },
-  purple: {
-    iconBg: "from-purple-400/10 to-pink-400/10",
-    iconBorder: "border-purple-500/10",
-    iconColor: "text-purple-400",
-    hoverBorder: "hover:border-purple-500/20",
-    tagBg: "bg-purple-500/10",
-    tagText: "text-purple-400",
-    tagBorder: "border-purple-500/20",
-  },
+  emerald: { labelText: "text-emerald-400" },
+  blue: { labelText: "text-blue-400" },
+  purple: { labelText: "text-purple-400" },
+};
+
+const hexColorMap = {
+  emerald: "#10b981",
+  blue: "#06b6d4",
+  purple: "#8b5cf6",
 };
 
 export default memo(function FeatureShowcase({
@@ -62,60 +46,99 @@ export default memo(function FeatureShowcase({
     <section className="relative py-24 sm:py-32 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={staggerContainer}
           className="text-center mb-16 sm:mb-20"
         >
-          <p className="text-xs font-medium text-emerald-400 uppercase tracking-widest mb-4">
-            {label}
-          </p>
+          <motion.div variants={fadeUpSpring}>
+            <p className={`text-xs font-medium ${colors.labelText} uppercase tracking-widest mb-4`}>
+              {label}
+            </p>
+          </motion.div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
-            {title}
+            <MaskLine delay={0.15}>{title}</MaskLine>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
+          <motion.p variants={fadeUpSpring} className="mt-4 text-base sm:text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
             {subtitle}
-          </p>
+          </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {features.map((feature, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group"
-            >
-              <div className={`glass-card p-6 sm:p-7 h-full transition-all duration-500 ${colors.hoverBorder} hover:shadow-lg relative overflow-hidden`}>
-                {/* Glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-5">
-                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${colors.iconBg} ${colors.iconBorder} border flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
-                      <feature.icon className={`w-5 h-5 ${colors.iconColor}`} />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+        >
+          {features.map((feature, i) => {
+            const hex = hexColorMap[accentColor];
+            return (
+              <motion.div key={i} variants={scaleInSpring} className="will-change-transform">
+                <TiltCard intensity={5} className="h-full">
+                  <div
+                    className="group relative p-7 overflow-hidden h-full"
+                    style={{
+                      background: `linear-gradient(135deg, ${hex}09 0%, rgba(0,0,0,0) 55%)`,
+                      border: "1px solid rgba(255,255,255,0.07)",
+                      clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))",
+                      transition: "border-color 0.4s ease, box-shadow 0.4s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = `${hex}40`;
+                      (e.currentTarget as HTMLElement).style.boxShadow = `0 0 40px ${hex}1c`;
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                    }}
+                  >
+                    {/* Top accent line */}
+                    <div className="absolute top-0 left-0 right-0 h-[2px]" style={{
+                      background: `linear-gradient(90deg, ${hex}, ${hex}00)`,
+                    }} />
+                    {/* Watermark icon */}
+                    <div className="absolute -bottom-3 -right-3 pointer-events-none" style={{ opacity: 0.05 }}>
+                      <feature.icon style={{ width: 110, height: 110, color: hex }} />
                     </div>
+
+                    {/* Icon */}
+                    <motion.div
+                      className="w-14 h-14 flex items-center justify-center mb-5"
+                      whileHover={{ scale: 1.1, rotate: -6 }}
+                      transition={SPRING_SNAPPY}
+                      style={{
+                        background: `${hex}12`,
+                        border: `1px solid ${hex}22`,
+                        clipPath: "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))",
+                      }}
+                    >
+                      <feature.icon className="w-7 h-7" style={{ color: hex }} />
+                    </motion.div>
+
+                    {/* Tag pill */}
                     {feature.tag && (
-                      <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${colors.tagBg} ${colors.tagText} ${colors.tagBorder} border`}>
+                      <span
+                        className="inline-block text-[10px] font-bold px-2.5 py-0.5 uppercase tracking-wider rounded-full mb-3"
+                        style={{ background: `${hex}15`, color: hex }}
+                      >
                         {feature.tag}
                       </span>
                     )}
-                  </div>
 
-                  <h3 className="text-base font-semibold text-white mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                    <h3 className="text-xl font-bold text-white mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                </TiltCard>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

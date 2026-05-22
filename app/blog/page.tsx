@@ -5,15 +5,14 @@ import { blogMetadata } from "@/lib/seo/metadata";
 export const metadata = blogMetadata;
 
 export default function BlogPage() {
-  const posts = getAllPosts();
+  const allPosts = getAllPosts();
   const featured = getFeaturedPost();
   const categories = getAllCategories();
-  const regularPosts = posts.filter((p) => !p.featured);
 
   return (
     <BlogClient
+      allPosts={allPosts}
       featured={featured}
-      regularPosts={regularPosts}
       categories={categories}
     />
   );

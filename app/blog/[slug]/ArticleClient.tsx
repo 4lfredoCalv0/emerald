@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock, ArrowLeft, ArrowRight, Tag, Calendar } from "lucide-react";
 import { BlogPost, BlogPostMeta } from "@/lib/blog";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import TableOfContents from "@/components/seo/table-of-contents";
+import { MaskLine } from "@/components/motion/MotionPrimitives";
+import { fadeUpSpring, scaleInSpring, staggerContainer } from "@/lib/animation-variants";
+
+const ACCENT = "#3b82f6";
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr + "T00:00:00");
@@ -24,15 +27,27 @@ interface ArticleClientProps {
 
 export default function ArticleClient({ post, htmlContent, relatedPosts }: ArticleClientProps) {
   return (
-    <div className="relative">
-      <Breadcrumbs
-        items={[
-          { label: "Blog", href: "/blog" },
-          { label: post.title, href: `/blog/${post.slug}` },
-        ]}
-      />
+    <div className="relative overflow-hidden" style={{ background: "#020810" }}>
+
+      {/* Global grid */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: "linear-gradient(rgba(59,130,246,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.02) 1px, transparent 1px)",
+        backgroundSize: "60px 60px",
+        zIndex: 0,
+      }} />
+
+      {/* Hero ambient blob */}
+      <div className="absolute pointer-events-none" style={{
+        top: "-100px", left: "50%", transform: "translateX(-50%)",
+        width: "700px", height: "500px",
+        background: `radial-gradient(ellipse at center, ${ACCENT}07 0%, transparent 65%)`,
+        zIndex: 0,
+      }} />
+
       <TableOfContents htmlContent={htmlContent} />
-      <section className="relative pt-4 pb-12 px-4">
+
+      {/* ── Article header ── */}
+      <section className="relative pt-24 pb-12 px-6 z-10">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -41,42 +56,56 @@ export default function ArticleClient({ post, htmlContent, relatedPosts }: Artic
           >
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-emerald-400 transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm font-medium mb-10 transition-all duration-300 group"
+              style={{ color: "rgba(255,255,255,0.35)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = ACCENT; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"; }}
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
               Volver al blog
             </Link>
 
-            <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="px-3 py-1 text-xs font-medium text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+            {/* Meta row */}
+            <div className="flex flex-wrap items-center gap-3 mb-7">
+              <span
+                className="text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-full"
+                style={{ background: `${ACCENT}14`, color: ACCENT, border: `1px solid ${ACCENT}25` }}
+              >
                 {post.category}
               </span>
-              <span className="flex items-center gap-1.5 text-sm text-gray-500">
+              <span className="flex items-center gap-1.5 text-xs text-gray-500">
                 <Calendar className="w-3.5 h-3.5" />
                 {formatDate(post.date)}
               </span>
-              <span className="flex items-center gap-1.5 text-sm text-gray-500">
+              <span className="flex items-center gap-1.5 text-xs text-gray-500">
                 <Clock className="w-3.5 h-3.5" />
                 {post.readingTime} min de lectura
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-6">
-              {post.title}
+            {/* Title */}
+            <h1
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-6"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              <MaskLine delay={0.1}>{post.title}</MaskLine>
             </h1>
 
-            <p className="text-lg sm:text-xl text-gray-400 leading-relaxed">
+            {/* Lead */}
+            <p className="text-lg text-gray-400 leading-relaxed">
               {post.description}
             </p>
           </motion.div>
-        </div>
 
-        <div className="max-w-3xl mx-auto mt-12">
-          <div className="h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
+          {/* Divider */}
+          <div className="mt-10 h-px" style={{
+            background: `linear-gradient(90deg, ${ACCENT}30, ${ACCENT}00)`,
+          }} />
         </div>
       </section>
 
-      <article className="relative py-8 px-4">
+      {/* ── Article body ── */}
+      <article className="relative py-8 px-6 z-10">
         <div className="max-w-3xl mx-auto">
           <div
             className="article-content"
@@ -85,15 +114,23 @@ export default function ArticleClient({ post, htmlContent, relatedPosts }: Artic
         </div>
       </article>
 
+      {/* ── Tags ── */}
       {post.tags.length > 0 && (
-        <section className="relative py-8 px-4">
+        <section className="relative py-8 px-6 z-10">
           <div className="max-w-3xl mx-auto">
-            <div className="flex flex-wrap items-center gap-2 pt-8 border-t border-white/5">
-              <Tag className="w-4 h-4 text-gray-500" />
+            <div className="flex flex-wrap items-center gap-2 pt-8" style={{
+              borderTop: "1px solid rgba(255,255,255,0.05)",
+            }}>
+              <Tag className="w-3.5 h-3.5 text-gray-600" />
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 text-xs text-gray-400 bg-white/5 border border-white/10 rounded-full"
+                  className="px-3 py-1 text-[11px] font-medium rounded-full"
+                  style={{
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    color: "#6b7280",
+                  }}
                 >
                   {tag}
                 </span>
@@ -103,62 +140,112 @@ export default function ArticleClient({ post, htmlContent, relatedPosts }: Artic
         </section>
       )}
 
+      {/* ── Related posts ── */}
       {relatedPosts.length > 0 && (
-        <section className="relative py-16 px-4">
+        <section className="relative py-16 px-6 z-10">
           <div className="max-w-3xl mx-auto">
-            <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12" />
-            <h2 className="text-xl font-semibold text-white mb-8">Artículos relacionados</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {relatedPosts.map((related) => (
-                <Link
-                  key={related.slug}
-                  href={`/blog/${related.slug}`}
-                  className="group glass-card p-6 hover:border-emerald-500/20 transition-all duration-500"
-                >
-                  <span className="text-xs text-emerald-400 mb-2 block">{related.category}</span>
-                  <h3 className="text-base font-semibold text-white group-hover:text-emerald-300 transition-colors leading-tight">
-                    {related.title}
-                  </h3>
-                  <span className="inline-flex items-center gap-1 text-sm text-gray-500 mt-3 group-hover:text-emerald-400 transition-colors">
-                    Leer
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-              ))}
-            </div>
+            <div className="h-px mb-10" style={{
+              background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)",
+            }} />
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={staggerContainer}
+            >
+              <motion.p
+                variants={fadeUpSpring}
+                className="text-xs font-bold uppercase tracking-[0.25em] mb-2"
+                style={{ color: ACCENT }}
+              >
+                Seguir leyendo
+              </motion.p>
+              <motion.h2
+                variants={fadeUpSpring}
+                className="text-xl font-bold text-white mb-8"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Artículos relacionados
+              </motion.h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {relatedPosts.map((related) => (
+                  <motion.div key={related.slug} variants={scaleInSpring}>
+                    <Link
+                      href={`/blog/${related.slug}`}
+                      className="group block h-full"
+                    >
+                      <div
+                        className="relative p-6 h-full overflow-hidden"
+                        style={{
+                          background: `linear-gradient(135deg, ${ACCENT}05 0%, rgba(0,0,0,0) 55%)`,
+                          border: "1px solid rgba(255,255,255,0.07)",
+                          clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
+                          transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLElement).style.borderColor = `${ACCENT}30`;
+                          (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${ACCENT}0e`;
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+                          (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                        }}
+                      >
+                        <div className="absolute top-0 left-0 right-0 h-[1px]" style={{
+                          background: `linear-gradient(90deg, ${ACCENT}50, ${ACCENT}00)`,
+                        }} />
+                        <span
+                          className="text-[10px] font-bold uppercase tracking-wider rounded-full px-2.5 py-0.5 mb-3 inline-block"
+                          style={{ background: `${ACCENT}10`, color: ACCENT }}
+                        >
+                          {related.category}
+                        </span>
+                        <h3
+                          className="text-sm font-bold text-white group-hover:text-[#60a5fa] transition-colors leading-snug mb-3"
+                          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                        >
+                          {related.title}
+                        </h3>
+                        <span
+                          className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-all duration-300"
+                          style={{ color: ACCENT }}
+                        >
+                          Leer
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+                        </span>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </section>
       )}
 
-      <section className="relative py-20 px-4">
+      {/* ── Subtle footer nav ── */}
+      <section className="relative py-16 px-6 z-10">
         <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="glass-card p-8 sm:p-12 text-center relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-emerald-500/5" />
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
-
-            <div className="relative z-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                ¿Este contenido resuena con tu realidad?
-              </h2>
-              <p className="text-gray-400 mb-8 max-w-lg mx-auto leading-relaxed">
-                Hablar es gratis. Modernizar tu negocio no debería ser complicado.
-                Empecemos con una conversación.
-              </p>
-              <Link
-                href="/agenda"
-                className="inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-white bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full hover:from-emerald-400 hover:to-emerald-500 transition-all shadow-lg shadow-emerald-500/25"
-              >
-                Agenda tu consulta estratégica
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-          </motion.div>
+          <div className="h-px mb-10" style={{
+            background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)",
+          }} />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors duration-200 group"
+            >
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
+              Todos los artículos
+            </Link>
+            <Link
+              href="/agenda"
+              className="inline-flex items-center gap-2 text-sm transition-colors duration-200 group"
+              style={{ color: ACCENT }}
+            >
+              ¿Quieres implementar esto en tu negocio?
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>

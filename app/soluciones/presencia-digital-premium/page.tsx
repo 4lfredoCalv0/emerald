@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     url: `${BASE_URL}/soluciones/presencia-digital-premium`,
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Presencia Digital Premium — Emerald",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Presencia Digital Premium | Emerald",
     description: "Sitios web premium, landing pages y branding digital que convierten visitantes en clientes.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
 };
 

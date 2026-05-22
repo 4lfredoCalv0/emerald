@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     url: `${BASE_URL}/agenda`,
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Agenda tu Consulta — Emerald",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Agenda tu Consulta Gratuita | Emerald",
     description: "30 minutos para analizar tu operación y diseñar tu estrategia de modernización.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
 };
 

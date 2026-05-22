@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     url: `${BASE_URL}/soluciones/automatizacion-inteligente`,
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Automatización Inteligente — Emerald",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Automatización Inteligente | Emerald",
     description: "Automatiza facturación, inventarios, CRM y marketing. Tu operación en piloto automático.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
 };
 

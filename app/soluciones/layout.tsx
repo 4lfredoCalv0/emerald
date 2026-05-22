@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     url: `${BASE_URL}/soluciones`,
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Soluciones — Emerald",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Soluciones | Emerald",
     description: "Presencia Digital Premium, Chatbots IA y Automatización Inteligente para tu negocio.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
 };
 

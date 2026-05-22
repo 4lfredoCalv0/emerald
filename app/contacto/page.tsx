@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     url: `${BASE_URL}/contacto`,
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Contacto — Emerald",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contacto | Emerald",
     description: "Contáctanos por email, WhatsApp o agenda una consulta estratégica gratuita.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
 };
 

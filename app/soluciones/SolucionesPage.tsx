@@ -233,7 +233,6 @@ export default function SolucionesPage() {
           <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
         </div>
 
-        <Breadcrumbs items={[{ label: "Soluciones", href: "/soluciones" }]} />
 
         <div className="relative max-w-5xl mx-auto text-center">
           <motion.div

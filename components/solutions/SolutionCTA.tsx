@@ -4,6 +4,7 @@ import { memo, ReactNode } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { staggerContainer, fadeUpSpring, buttonInteraction, SPRING_SNAPPY } from "@/lib/animation-variants";
 
 interface SolutionCTAProps {
   accentColor: "emerald" | "blue" | "purple";
@@ -39,10 +40,10 @@ export default memo(function SolutionCTA({
     <section className="relative py-24 sm:py-32 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 50, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9, ease: [0.34, 1.56, 0.64, 1] }}
           className="glass-card p-8 sm:p-12 lg:p-16 text-center relative overflow-hidden"
         >
           {/* Ambient glow */}
@@ -59,26 +60,43 @@ export default memo(function SolutionCTA({
             className="absolute inset-0"
           />
 
-          <div className="relative z-10">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">
-              {title}
-            </h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-              {description}
-            </p>
-            <Link
-              href="/agenda"
-              className={`group inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-white rounded-full transition-all shadow-lg ${colors.button}`}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainer}
+            className="relative z-10"
+          >
+            <motion.h2
+              variants={fadeUpSpring}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6 leading-tight"
             >
-              {ctaText}
-              <motion.div
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ArrowRight className="w-5 h-5" />
+              {title}
+            </motion.h2>
+            <motion.p
+              variants={fadeUpSpring}
+              className="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+            >
+              {description}
+            </motion.p>
+            <motion.div variants={fadeUpSpring} className="inline-block">
+              <motion.div {...buttonInteraction}>
+                <Link
+                  href="/agenda"
+                  className={`group inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-white rounded-full transition-all shadow-lg ${colors.button}`}
+                >
+                  {ctaText}
+                  <motion.div
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 4 }}
+                    transition={SPRING_SNAPPY}
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.div>
+                </Link>
               </motion.div>
-            </Link>
-          </div>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

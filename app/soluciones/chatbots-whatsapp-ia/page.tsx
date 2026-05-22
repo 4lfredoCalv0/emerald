@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     url: `${BASE_URL}/soluciones/chatbots-whatsapp-ia`,
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Chatbots y WhatsApp IA — Emerald",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Chatbots y WhatsApp IA | Emerald",
     description: "Chatbots inteligentes que atienden clientes, califican leads y agendan citas 24/7.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
 };
 

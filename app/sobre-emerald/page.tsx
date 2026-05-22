@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Hexagon, ArrowRight, Lightbulb, Eye, Target, Sparkles, Cpu, Globe } from "lucide-react";
-import Breadcrumbs from "@/components/Breadcrumbs";
+import { EASE_OUT_EXPO } from "@/lib/animation-variants";
+import { MaskLine } from "@/components/motion/MotionPrimitives";
 
 export default function SobreEmeraldPage() {
   return (
@@ -25,39 +26,36 @@ export default function SobreEmeraldPage() {
           <div className="absolute top-[70%] left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/5 to-transparent" />
         </div>
 
-        <Breadcrumbs items={[{ label: "Sobre Emerald", href: "/sobre-emerald" }]} />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, scale: 0.85, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm mb-8"
           >
             <Hexagon className="w-3.5 h-3.5" />
             <span>Infraestructura inteligente para empresas modernas</span>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
-          >
-            Conectando negocios tradicionales{" "}
-            <span className="gradient-text">con el futuro</span>
-          </motion.h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+            <MaskLine delay={0.2}>
+              Conectando negocios tradicionales{" "}
+              <span className="gradient-text">con el futuro</span>
+            </MaskLine>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-6 text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed"
-          >
-            Emerald nace en Barranquilla con una misión clara: ayudar a negocios que aún
-            operan de forma manual a convertirse en empresas modernas, inteligentes y preparadas
-            para lo que viene.
-          </motion.p>
+          <div className="mt-6 text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed overflow-hidden">
+            <motion.p
+              initial={{ y: "110%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.45 }}
+            >
+              Emerald nace en Barranquilla con una misión clara: ayudar a negocios que aún
+              operan de forma manual a convertirse en empresas modernas, inteligentes y preparadas
+              para lo que viene.
+            </motion.p>
+          </div>
 
           <motion.div
             initial={{ opacity: 0 }}

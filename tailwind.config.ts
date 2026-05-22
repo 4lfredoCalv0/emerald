@@ -8,9 +8,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["'Manrope'", "sans-serif"],
-        body: ["'Inter'", "sans-serif"],
-        brand: ["'Manrope'", "sans-serif"],
+        heading: ["var(--font-space-grotesk)", "sans-serif"],
+        body: ["var(--font-inter)", "sans-serif"],
+        brand: ["var(--font-space-grotesk)", "sans-serif"],
+        mono: ["var(--font-jetbrains-mono)", "monospace"],
       },
       colors: {
         brand: {
@@ -26,62 +27,85 @@ const config: Config = {
           900: "#064e3b",
           950: "#022c22",
         },
+        neon: {
+          green: "#10b981",
+          "green-bright": "#34d399",
+          cyan: "#06b6d4",
+          magenta: "#ec4899",
+        },
         surface: {
-          DEFAULT: "#030712",
-          50: "#0f172a",
-          100: "#1e293b",
-          200: "#334155",
+          DEFAULT: "#030303",
+          50: "#0a0a0a",
+          100: "#111111",
+          200: "#1a1a1a",
         },
       },
+      clipPath: {
+        "cutout": "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
+        "cutout-sm": "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))",
+        "cutout-lg": "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))",
+      },
       animation: {
-        glow: "glow 2s ease-in-out infinite alternate",
-        float: "float 6s ease-in-out infinite",
-        "float-slow": "float-slow 8s ease-in-out infinite",
-        "gradient-x": "gradient-x 15s ease infinite",
-        flow: "flow 12s ease-in-out infinite",
-        "flow-fast": "flow 6s ease-in-out infinite",
-        "cable-pulse": "cable-pulse 3s ease-in-out infinite",
-        "node-pulse": "node-pulse 2s ease-in-out infinite",
-        "structural-arc": "structural-arc 4s ease-in-out infinite alternate",
-        "bridge-glow": "bridge-glow 4s ease-in-out infinite alternate",
+        "gradient-shift": "gradient-shift 6s ease infinite",
+        "pulse-dot": "pulse-dot 2s ease-in-out infinite",
+        "float": "float 6s ease-in-out infinite",
+        "float-slow": "float 10s ease-in-out infinite",
+        "scan": "scan 4s linear infinite",
+        "glitch": "glitch-skew 4s infinite linear alternate-reverse",
+        "border-flow": "border-flow 3s linear infinite",
+        "electric-spark": "electric-spark 1.5s ease-in-out infinite",
+        "fade-in-up": "fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "scale-in": "scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "slide-in-left": "slide-in-left 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "slide-in-right": "slide-in-right 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
       },
       keyframes: {
-        glow: {
-          "0%": { boxShadow: "0 0 20px rgba(16, 185, 129, 0.3)" },
-          "100%": { boxShadow: "0 0 40px rgba(16, 185, 129, 0.6)" },
+        "gradient-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "pulse-dot": {
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.5", transform: "scale(0.8)" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
         },
-        "float-slow": {
-          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
-          "50%": { transform: "translateY(-10px) rotate(0.5deg)" },
+        scan: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100vh)" },
         },
-        "gradient-x": {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
+        "glitch-skew": {
+          "0%, 95%, 100%": { transform: "skew(0deg)" },
+          "96%": { transform: "skew(-1deg)" },
+          "97%": { transform: "skew(1deg)" },
+          "98%": { transform: "skew(-0.5deg)" },
+          "99%": { transform: "skew(0.5deg)" },
         },
-        flow: {
-          "0%": { transform: "translateX(0%)" },
-          "50%": { transform: "translateX(-5%)" },
-          "100%": { transform: "translateX(0%)" },
+        "border-flow": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "200% 50%" },
         },
-        "cable-pulse": {
-          "0%, 100%": { opacity: "0.3" },
-          "50%": { opacity: "0.8" },
+        "electric-spark": {
+          "0%, 100%": { opacity: "0.3", transform: "scale(0.95)" },
+          "50%": { opacity: "1", transform: "scale(1.05)" },
         },
-        "node-pulse": {
-          "0%, 100%": { opacity: "0.3", r: "1" },
-          "50%": { opacity: "0.7", r: "2" },
+        "fade-in-up": {
+          from: { opacity: "0", transform: "translateY(30px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
-        "structural-arc": {
-          "0%": { d: "path('M 0,0 Q 50,0 100,0')" },
-          "100%": { d: "path('M 0,0 Q 50,20 100,0')" },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.9)" },
+          to: { opacity: "1", transform: "scale(1)" },
         },
-        "bridge-glow": {
-          "0%": { boxShadow: "0 0 15px rgba(16, 185, 129, 0.15)" },
-          "100%": { boxShadow: "0 0 35px rgba(16, 185, 129, 0.3)" },
+        "slide-in-left": {
+          from: { opacity: "0", transform: "translateX(-40px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        "slide-in-right": {
+          from: { opacity: "0", transform: "translateX(40px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
         },
       },
     },

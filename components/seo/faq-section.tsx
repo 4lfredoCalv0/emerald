@@ -12,36 +12,19 @@ interface FAQItem {
 interface FAQSectionProps {
   items: FAQItem[];
   accentColor?: "emerald" | "blue" | "purple";
+  showTitle?: boolean;
 }
 
-export default function FAQSection({ items, accentColor = "emerald" }: FAQSectionProps) {
+export default function FAQSection({ items, accentColor = "emerald", showTitle = true }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const colorMap = {
-    emerald: {
-      text: "text-emerald-400",
-      bg: "bg-emerald-500/10",
-      border: "border-emerald-500/20",
-      hoverBorder: "hover:border-emerald-500/30",
-      icon: "text-emerald-400",
-    },
-    blue: {
-      text: "text-blue-400",
-      bg: "bg-blue-500/10",
-      border: "border-blue-500/20",
-      hoverBorder: "hover:border-blue-500/30",
-      icon: "text-blue-400",
-    },
-    purple: {
-      text: "text-purple-400",
-      bg: "bg-purple-500/10",
-      border: "border-purple-500/20",
-      hoverBorder: "hover:border-purple-500/30",
-      icon: "text-purple-400",
-    },
+    emerald: { primary: "#10b981", bright: "#34d399", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.15)" },
+    blue: { primary: "#06b6d4", bright: "#22d3ee", bg: "rgba(6,182,212,0.08)", border: "rgba(6,182,212,0.15)" },
+    purple: { primary: "#ec4899", bright: "#f472b6", bg: "rgba(236,72,153,0.08)", border: "rgba(236,72,153,0.15)" },
   };
 
-  const colors = colorMap[accentColor];
+  const c = colorMap[accentColor];
 
   return (
     <section className="relative py-24 sm:py-32 px-4">
@@ -53,13 +36,11 @@ export default function FAQSection({ items, accentColor = "emerald" }: FAQSectio
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className={`text-xs font-medium ${colors.text} uppercase tracking-widest mb-3`}>
-            FAQ
-          </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-            Preguntas{" "}
-            <span className="gradient-text">frecuentes</span>
-          </h2>
+          {showTitle && (
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-heading">
+              RESOLVEMOS TUS DUDAS
+            </h2>
+          )}
         </motion.div>
 
         <div className="space-y-4">
@@ -70,21 +51,32 @@ export default function FAQSection({ items, accentColor = "emerald" }: FAQSectio
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              className={`glass-card overflow-hidden transition-all duration-300 ${colors.hoverBorder}`}
+              className="overflow-hidden transition-all duration-300"
+              style={{
+                background: "rgba(255,255,255,0.02)",
+                border: `1px solid rgba(255,255,255,0.05)`,
+                clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = c.border;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.05)";
+              }}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full flex items-center justify-between p-6 sm:p-8 text-left"
                 aria-expanded={openIndex === index}
               >
-                <span className="text-base sm:text-lg font-semibold text-white pr-4">
+                <span className="text-base sm:text-lg font-semibold text-white pr-4 font-heading">
                   {item.question}
                 </span>
                 <motion.div
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className={`w-5 h-5 ${colors.icon} shrink-0`} />
+                  <ChevronDown className="w-5 h-5 shrink-0" style={{ color: c.primary }} />
                 </motion.div>
               </button>
 

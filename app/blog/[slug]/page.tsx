@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       url: postUrl,
       images: [
         {
-          url: "/og-image.png",
+          url: "/opengraph-image",
           width: 1200,
           height: 630,
           alt: post.title,
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: ["/og-image.png"],
+      images: ["/opengraph-image"],
     },
   };
 }
