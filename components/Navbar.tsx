@@ -65,7 +65,7 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div
-        className={`absolute inset-0 transition-all duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 pointer-events-none transition-all duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`}
         style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.9), transparent)" }}
       />
 
