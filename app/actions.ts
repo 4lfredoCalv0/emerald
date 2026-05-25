@@ -11,6 +11,55 @@ const TO_EMAIL = "contactoemerald@proton.me";
 const FROM_CONTACT = process.env.FROM_EMAIL || "Emerald <onboarding@resend.dev>";
 const FROM_AGENDA  = process.env.FROM_EMAIL || "Emerald <onboarding@resend.dev>";
 
+// ─── Notion ──────────────────────────────────────────────────────────────────
+const NOTION_DB_ID = "a2f11f32-b585-4a77-a672-7532becf8077";
+
+function normalizarServicio(valor: string): string {
+  const v = valor.toLowerCase();
+  if (v.includes("presencia") || v.includes("web") || v.includes("branding") || v.includes("seo")) return "Presencia Digital Premium";
+  if (v.includes("chatbot") || v.includes("whatsapp")) return "Chatbot WhatsApp con IA";
+  if (v.includes("automatiz")) return "Automatización Inteligente";
+  return "Sin definir";
+}
+
+async function guardarEnNotion(datos: {
+  nombre: string;
+  email: string;
+  telefono?: string;
+  servicio?: string;
+  notas?: string;
+  fuente: "Formulario Web" | "Formulario Agenda" | "Chatbot Web";
+}) {
+  const token = process.env.NOTION_TOKEN;
+  if (!token) return;
+
+  try {
+    await fetch("https://api.notion.com/v1/pages", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Notion-Version": "2022-06-28",
+      },
+      body: JSON.stringify({
+        parent: { database_id: NOTION_DB_ID },
+        properties: {
+          Nombre: { title: [{ text: { content: datos.nombre } }] },
+          Email: { email: datos.email },
+          ...(datos.telefono ? { Teléfono: { phone_number: datos.telefono } } : {}),
+          ...(datos.servicio ? { "Servicio de interés": { select: { name: normalizarServicio(datos.servicio) } } } : {}),
+          Estado: { select: { name: "Nuevo" } },
+          Fuente: { select: { name: datos.fuente } },
+          ...(datos.notas ? { Notas: { rich_text: [{ text: { content: datos.notas } }] } } : {}),
+        },
+      }),
+    });
+  } catch (err) {
+    console.error("Error guardando en Notion:", err);
+    // No fallar el flujo principal si Notion falla
+  }
+}
+
 interface ContactFormData {
   nombre: string;
   empresa: string;
@@ -101,6 +150,21 @@ export async function submitContactForm(data: ContactFormData) {
       }),
     }).catch((e) => console.error("Confirmation email failed:", e));
 
+    // 3. Guardar lead en Notion
+    const notas = [
+      data.empresa ? `Empresa: ${data.empresa}` : "",
+      data.mensaje ? `Mensaje: ${data.mensaje}` : "",
+    ].filter(Boolean).join(" | ");
+
+    guardarEnNotion({
+      nombre: data.nombre,
+      email: data.email,
+      telefono: data.telefono || undefined,
+      servicio: data.solucion || undefined,
+      notas: notas || undefined,
+      fuente: "Formulario Web",
+    });
+
     return { success: true };
   } catch {
     return { success: false, error: "Error inesperado. Por favor intenta de nuevo." };
@@ -187,6 +251,21 @@ export async function submitAgendaForm(data: AgendaFormData) {
         tipo: "agenda",
       }),
     }).catch((e) => console.error("Agenda confirmation email failed:", e));
+
+    // 3. Guardar lead en Notion
+    const notas = [
+      data.empresa ? `Empresa: ${data.empresa}` : "",
+      data.preferencia ? `Preferencia horaria: ${data.preferencia}` : "",
+      data.mensaje ? `Mensaje: ${data.mensaje}` : "",
+    ].filter(Boolean).join(" | ");
+
+    guardarEnNotion({
+      nombre: data.nombre,
+      email: data.email,
+      telefono: data.telefono || undefined,
+      notas: notas || undefined,
+      fuente: "Formulario Agenda",
+    });
 
     return { success: true };
   } catch {
