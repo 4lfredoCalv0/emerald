@@ -186,12 +186,13 @@ El SEO técnico es crítica prioridad. Implementaciones presentes:
 
 ## Reglas para Claude Code
 
-1. **Consistencia visual primero** — cualquier cambio debe respetar la paleta, tipografía y estilo descritos arriba.
-2. **No romper el minimalismo** — si una adición se siente recargada, simplificarla.
-3. **Responsive impecable** — mobile-first, probar breakpoints sm/md/lg/xl.
-4. **Performance y SEO** — no añadir dependencias pesadas innecesarias; mantener las optimizaciones existentes.
-5. **Animaciones suaves** — usar `framer-motion` con `lib/animation-variants.ts`; nunca animaciones abruptas.
-6. **Componentes reutilizables** — antes de crear algo nuevo, revisar si existe en `components/solutions/` o `components/visuals/`.
-7. **No hacer commit/push/deploy** sin instrucción explícita del usuario.
-8. **Preguntar antes** de cambios que afecten branding, SEO o conversión.
-9. **Secrets nunca en código** — cualquier valor sensible va en `.env.local` y se accede con `process.env`.
+1. **Siempre responder en español** — todas las respuestas al usuario y todo el contenido generado relacionado con Emerald (copy, captions, documentación, Notion, comentarios de código) deben estar en español. Sin excepciones.
+2. **Consistencia visual primero** — cualquier cambio debe respetar la paleta, tipografía y estilo descritos arriba.
+3. **No romper el minimalismo** — si una adición se siente recargada, simplificarla.
+4. **Responsive impecable** — mobile-first, probar breakpoints sm/md/lg/xl.
+5. **Performance y SEO** — no añadir dependencias pesadas innecesarias; mantener las optimizaciones existentes.
+6. **Animaciones suaves** — usar `framer-motion` con `lib/animation-variants.ts`; nunca animaciones abruptas.
+7. **Componentes reutilizables** — antes de crear algo nuevo, revisar si existe en `components/solutions/` o `components/visuals/`.
+8. **No hacer commit/push/deploy** sin instrucción explícita del usuario.
+9. **Preguntar antes** de cambios que afecten branding, SEO o conversión.
+10. **Secrets nunca en código** — cualquier valor sensible va en `.env.local` y se accede con `process.env`.

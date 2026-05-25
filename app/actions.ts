@@ -5,6 +5,11 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const TO_EMAIL = "contactoemerald@proton.me";
+// FROM_EMAIL: usa un dominio verificado en Resend.
+// Si aún no tienes dominio verificado, usa onboarding@resend.dev solo para pruebas.
+// Verificar en: https://resend.com/domains
+const FROM_CONTACT = process.env.FROM_EMAIL || "Emerald <onboarding@resend.dev>";
+const FROM_AGENDA  = process.env.FROM_EMAIL || "Emerald <onboarding@resend.dev>";
 
 interface ContactFormData {
   nombre: string;
@@ -26,8 +31,9 @@ interface AgendaFormData {
 
 export async function submitContactForm(data: ContactFormData) {
   try {
+    // 1. Email interno a Emerald
     const { error } = await resend.emails.send({
-      from: "Emerald Contact <onboarding@resend.dev>",
+      from: FROM_CONTACT,
       to: [TO_EMAIL],
       subject: `Nuevo contacto: ${data.nombre}${data.empresa ? ` — ${data.empresa}` : ""}`,
       html: `
@@ -80,9 +86,20 @@ export async function submitContactForm(data: ContactFormData) {
     });
 
     if (error) {
-      console.error("Resend error:", error.message);
+      console.error("Resend error (internal):", error.message);
       return { success: false, error: `No se pudo enviar: ${error.message}` };
     }
+
+    // 2. Email de confirmación al usuario
+    await resend.emails.send({
+      from: FROM_CONTACT,
+      to: [data.email],
+      subject: `Recibimos tu mensaje, ${data.nombre.split(" ")[0]} 👋`,
+      html: confirmationEmailHtml({
+        nombre: data.nombre,
+        tipo: "contacto",
+      }),
+    }).catch((e) => console.error("Confirmation email failed:", e));
 
     return { success: true };
   } catch {
@@ -101,8 +118,9 @@ function escapeHtml(str: string) {
 
 export async function submitAgendaForm(data: AgendaFormData) {
   try {
+    // 1. Email interno a Emerald
     const { error } = await resend.emails.send({
-      from: "Emerald Agenda <onboarding@resend.dev>",
+      from: FROM_AGENDA,
       to: [TO_EMAIL],
       subject: `Consulta estratégica: ${data.nombre}${data.empresa ? ` — ${data.empresa}` : ""}`,
       html: `
@@ -155,12 +173,102 @@ export async function submitAgendaForm(data: AgendaFormData) {
     });
 
     if (error) {
-      console.error("Resend error:", error.message);
+      console.error("Resend error (agenda internal):", error.message);
       return { success: false, error: `No se pudo enviar: ${error.message}` };
     }
+
+    // 2. Confirmación al usuario
+    await resend.emails.send({
+      from: FROM_AGENDA,
+      to: [data.email],
+      subject: `Solicitud recibida — te contactamos pronto, ${data.nombre.split(" ")[0]} 🗓️`,
+      html: confirmationEmailHtml({
+        nombre: data.nombre,
+        tipo: "agenda",
+      }),
+    }).catch((e) => console.error("Agenda confirmation email failed:", e));
 
     return { success: true };
   } catch {
     return { success: false, error: "Error inesperado. Por favor intenta de nuevo." };
   }
+}
+
+// ─── Template de email de confirmación al usuario ────────────────────────────
+function confirmationEmailHtml({ nombre, tipo }: { nombre: string; tipo: "contacto" | "agenda" }) {
+  const primerNombre = escapeHtml(nombre.split(" ")[0]);
+  const isAgenda = tipo === "agenda";
+
+  return `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+    <body style="margin:0;padding:0;background:#030303;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+      <div style="max-width:560px;margin:40px auto;padding:0 20px;">
+
+        <!-- Header con gradiente Emerald -->
+        <div style="background:linear-gradient(135deg,#052e1c 0%,#020810 100%);border:1px solid #10b98130;border-radius:16px 16px 0 0;padding:40px 36px 32px;">
+          <div style="display:inline-flex;align-items:center;gap:8px;background:#10b98115;border:1px solid #10b98130;border-radius:99px;padding:6px 14px;margin-bottom:24px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#10b981;display:inline-block;box-shadow:0 0 8px #10b981;"></span>
+            <span style="font-size:11px;color:#34d399;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Emerald · Agencia AI-first</span>
+          </div>
+          <h1 style="margin:0 0 10px;font-size:26px;font-weight:700;color:#ffffff;letter-spacing:-0.02em;line-height:1.2;">
+            ${isAgenda ? `Recibimos tu solicitud, ${primerNombre}.` : `Hola ${primerNombre}, tu mensaje llegó.`}
+          </h1>
+          <p style="margin:0;font-size:15px;color:#94a3b8;line-height:1.6;">
+            ${isAgenda
+              ? "Revisaremos tu solicitud de consulta estratégica y te escribiremos para confirmar el horario."
+              : "Revisamos tu mensaje y te responderemos a la brevedad con la información que necesitas."}
+          </p>
+        </div>
+
+        <!-- Cuerpo -->
+        <div style="background:#0a0f1a;border:1px solid #10b98118;border-top:none;border-radius:0 0 16px 16px;padding:32px 36px;">
+
+          <!-- Qué pasa ahora -->
+          <p style="margin:0 0 20px;font-size:12px;color:#10b981;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Qué pasa ahora</p>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
+            ${isAgenda ? `
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <div style="width:28px;height:28px;min-width:28px;border-radius:8px;background:#10b98115;border:1px solid #10b98125;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#10b981;line-height:28px;text-align:center;">1</div>
+                <div><p style="margin:0;font-size:14px;color:#e2e8f0;font-weight:500;">Revisamos tu solicitud</p><p style="margin:4px 0 0;font-size:13px;color:#64748b;">En las próximas horas revisamos la información que nos enviaste.</p></div>
+              </div>
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <div style="width:28px;height:28px;min-width:28px;border-radius:8px;background:#10b98115;border:1px solid #10b98125;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#10b981;line-height:28px;text-align:center;">2</div>
+                <div><p style="margin:0;font-size:14px;color:#e2e8f0;font-weight:500;">Te confirmamos el horario</p><p style="margin:4px 0 0;font-size:13px;color:#64748b;">Recibirás otro email con el enlace de la llamada y la hora confirmada.</p></div>
+              </div>
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <div style="width:28px;height:28px;min-width:28px;border-radius:8px;background:#10b98115;border:1px solid #10b98125;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#10b981;line-height:28px;text-align:center;">3</div>
+                <div><p style="margin:0;font-size:14px;color:#e2e8f0;font-weight:500;">Consulta estratégica — 30 min</p><p style="margin:4px 0 0;font-size:13px;color:#64748b;">Analizamos tu operación y diseñamos un plan concreto para tu empresa.</p></div>
+              </div>` : `
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <div style="width:28px;height:28px;min-width:28px;border-radius:8px;background:#10b98115;border:1px solid #10b98125;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#10b981;line-height:28px;text-align:center;">1</div>
+                <div><p style="margin:0;font-size:14px;color:#e2e8f0;font-weight:500;">Revisamos tu mensaje</p><p style="margin:4px 0 0;font-size:13px;color:#64748b;">Habitualmente respondemos dentro de las próximas 24 horas hábiles.</p></div>
+              </div>
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <div style="width:28px;height:28px;min-width:28px;border-radius:8px;background:#10b98115;border:1px solid #10b98125;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#10b981;line-height:28px;text-align:center;">2</div>
+                <div><p style="margin:0;font-size:14px;color:#e2e8f0;font-weight:500;">Te respondemos con un plan</p><p style="margin:4px 0 0;font-size:13px;color:#64748b;">Nada genérico. Una propuesta pensada específicamente para tu situación.</p></div>
+              </div>`}
+          </div>
+
+          <!-- CTA WhatsApp -->
+          <div style="background:#10b98108;border:1px solid #10b98120;border-radius:12px;padding:20px 22px;margin-bottom:28px;">
+            <p style="margin:0 0 6px;font-size:13px;color:#94a3b8;">¿Necesitas respuesta inmediata?</p>
+            <a href="https://wa.me/573239168300" style="font-size:14px;color:#10b981;font-weight:600;text-decoration:none;">Escríbenos por WhatsApp →</a>
+          </div>
+
+          <!-- Footer -->
+          <div style="border-top:1px solid #ffffff0a;padding-top:20px;text-align:center;">
+            <p style="margin:0;font-size:12px;color:#334155;">
+              <strong style="color:#64748b;">Emerald</strong> · Barranquilla, Colombia · AI-first
+            </p>
+            <p style="margin:6px 0 0;font-size:11px;color:#1e293b;">
+              <a href="https://emerald-co.vercel.app" style="color:#10b98170;text-decoration:none;">emerald-co.vercel.app</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
 }

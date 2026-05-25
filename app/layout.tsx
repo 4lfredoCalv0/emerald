@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { AnalyticsWrapper } from "@/components/AnalyticsWrapper";
+import { ChatProvider } from "@/components/chat-context";
+import { ChatWidget } from "@/components/ChatWidget";
 import { generateOrganizationSchema, generateLocalBusinessSchema } from "@/lib/seo/schema";
 import { defaultMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
@@ -51,8 +53,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#030303] text-white antialiased">
-        {children}
-        <AnalyticsWrapper />
+        <ChatProvider>
+          {children}
+          <ChatWidget />
+          <AnalyticsWrapper />
+        </ChatProvider>
       </body>
     </html>
   );

@@ -1,0 +1,10 @@
+.next/
+node_modules/
+.env.local
+.env*.local
+.claude/assets/*.pdf
+.claude/assets/*.html
+.claude/assets/*.docx
+public/*.webp
+public/*.png
+public/*.jpg
