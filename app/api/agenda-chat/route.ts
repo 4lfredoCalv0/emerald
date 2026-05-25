@@ -51,7 +51,6 @@ async function generarNotas(conversacion: Array<{ role: string; content: string 
           content: `Eres un asistente de ventas. Basado en esta conversación de chat con un lead, escribe una nota breve (máximo 3 oraciones) para el equipo de ventas de Emerald. Incluye: qué busca el cliente, contexto relevante de su negocio o situación, y cualquier detalle útil para la llamada. Escribe en español, en tercera persona, de forma directa y práctica. Si la conversación no tiene contexto útil, escribe solo: "Sin contexto adicional."\n\nConversación:\n${conversacionTexto}`,
         },
       ],
-      maxTokens: 200,
     });
 
     return text.trim();
