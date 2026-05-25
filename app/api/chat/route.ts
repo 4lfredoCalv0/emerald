@@ -147,7 +147,6 @@ export async function POST(req: NextRequest) {
       model: groq("llama-3.3-70b-versatile"),
       system: systemPrompt,
       messages,
-      maxTokens: 400,
     });
 
     return Response.json({ text });
