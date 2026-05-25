@@ -21,7 +21,7 @@ interface DatosAgenda {
   servicio: string;
 }
 
-const MENSAJE_BIENVENIDA = "Hola, soy el asistente de Emerald. ¿En qué puedo ayudarte hoy?";
+const MENSAJE_BIENVENIDA = "Hola, soy Karl, el asistente de Emerald. ¿En qué puedo ayudarte hoy?";
 
 // Palabras clave que activan el flujo de agenda
 const PALABRAS_AGENDA = ["agendar", "agenda", "cita", "llamada", "reunión", "reunion", "contactar", "hablar con", "quiero hablar", "quiero una llamada", "solicitar", "cotización", "cotizacion"];
@@ -266,7 +266,7 @@ export function ChatWidget() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                    {agendaStep !== "idle" && agendaStep !== "listo" ? "Agendando llamada" : "Asistente Emerald"}
+                    {agendaStep !== "idle" && agendaStep !== "listo" ? "Agendando llamada" : "Karl · Emerald"}
                   </p>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#10b981]" style={{ boxShadow: "0 0 6px #10b981" }} />
