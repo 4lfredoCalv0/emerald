@@ -1,12 +1,28 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { NextRequest } from "next/server";
 import { generateText } from "ai";
 import { createGroq } from "@ai-sdk/groq";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const groq = createGroq({ apiKey: process.env.GROQ_API_KEY });
-const EQUIPO_EMAIL = "contactoemerald@proton.me";
-const FROM = process.env.FROM_EMAIL || "Emerald <onboarding@resend.dev>";
+const EQUIPO_EMAIL = "contactoemerald.ia@gmail.com";
+const GMAIL_USER = process.env.GMAIL_USER || "contactoemerald.ia@gmail.com";
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
+
+const sendMail = async (opts: { to: string; subject: string; html: string }) => {
+  await transporter.sendMail({
+    from: `"Emerald" <${GMAIL_USER}>`,
+    ...opts,
+  });
+};
 
 // ID de la base de datos de Leads en Notion
 const NOTION_DB_ID = "a2f11f32-b585-4a77-a672-7532becf8077";
@@ -125,9 +141,8 @@ export async function POST(req: NextRequest) {
     guardarEnNotion({ nombre, email, telefono: telefono || "", servicio: servicio || "", notas });
 
     // Email interno al equipo
-    await resend.emails.send({
-      from: FROM,
-      to: [EQUIPO_EMAIL],
+    await sendMail({
+      to: EQUIPO_EMAIL,
       subject: `🗓 Nueva solicitud de llamada — ${nombre}`,
       html: `
         <div style="font-family: 'Inter', sans-serif; background: #030303; color: #fff; padding: 40px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.07);">
@@ -167,9 +182,8 @@ export async function POST(req: NextRequest) {
     });
 
     // Email de bienvenida al cliente
-    await resend.emails.send({
-      from: FROM,
-      to: [email],
+    await sendMail({
+      to: email,
       subject: `Bienvenido a Emerald, ${primerNombre} — tu solicitud está en camino`,
       html: `
         <!DOCTYPE html>

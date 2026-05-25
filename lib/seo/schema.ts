@@ -217,7 +217,7 @@ export function generateLocalBusinessSchema(): LocalBusinessSchema {
     logo: `${BASE_URL}/LogoCyber.webp`,
     image: `${BASE_URL}/opengraph-image`,
     telephone: "+57-323-9168300",
-    email: "contactoemerald@proton.me",
+    email: "contactoemerald.ia@gmail.com",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Barranquilla",

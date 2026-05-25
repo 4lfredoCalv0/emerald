@@ -40,7 +40,7 @@ export default function Footer() {
               AI-First company. Modernización empresarial con inteligencia artificial.
             </p>
             <div className="flex flex-col gap-2">
-              <a href="mailto:contactoemerald@proton.me" className="text-sm text-gray-400 hover:text-[#10b981] break-all">contactoemerald@proton.me</a>
+              <a href="mailto:contactoemerald.ia@gmail.com" className="text-sm text-gray-400 hover:text-[#10b981] break-all">contactoemerald.ia@gmail.com</a>
               <a href="https://wa.me/573239168300" className="text-sm text-gray-400 hover:text-[#10b981]">+57 323 9168300</a>
             </div>
             <a

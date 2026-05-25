@@ -138,7 +138,7 @@ export default function PoliticaPrivacidadPage() {
                 <div className="mt-4 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
                   <p className="text-sm text-gray-300">
                     <strong className="text-emerald-300">Email:</strong>{" "}
-                    contactoemerald@proton.me
+                    contactoemerald.ia@gmail.com
                   </p>
                   <p className="text-sm text-gray-300 mt-1">
                     <strong className="text-emerald-300">Dirección:</strong>{" "}

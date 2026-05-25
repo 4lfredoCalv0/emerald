@@ -184,7 +184,7 @@ export default function ContactoPage() {
                 </p>
                 <div className="space-y-5">
                   {[
-                    { icon: Mail, label: "Email", value: "contactoemerald@proton.me", href: "mailto:contactoemerald@proton.me" },
+                    { icon: Mail, label: "Email", value: "contactoemerald.ia@gmail.com", href: "mailto:contactoemerald.ia@gmail.com" },
                     { icon: MessageSquare, label: "WhatsApp", value: "+57 323 9168300", href: "https://wa.me/573239168300" },
                     { icon: MapPin, label: "Ubicación", value: "Barranquilla, Colombia", href: null },
                   ].map(({ icon: Icon, label, value, href }) => (

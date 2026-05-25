@@ -1,15 +1,26 @@
 "use server";
 
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const TO_EMAIL = "contactoemerald.ia@gmail.com";
+const GMAIL_USER = process.env.GMAIL_USER || "contactoemerald.ia@gmail.com";
 
-const TO_EMAIL = "contactoemerald@proton.me";
-// FROM_EMAIL: usa un dominio verificado en Resend.
-// Si aún no tienes dominio verificado, usa onboarding@resend.dev solo para pruebas.
-// Verificar en: https://resend.com/domains
-const FROM_CONTACT = process.env.FROM_EMAIL || "Emerald <onboarding@resend.dev>";
-const FROM_AGENDA  = process.env.FROM_EMAIL || "Emerald <onboarding@resend.dev>";
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
+
+const sendMail = async (opts: { to: string; subject: string; html: string }) => {
+  await transporter.sendMail({
+    from: `"Emerald" <${GMAIL_USER}>`,
+    ...opts,
+  });
+};
 
 // ─── Notion ──────────────────────────────────────────────────────────────────
 const NOTION_DB_ID = "a2f11f32-b585-4a77-a672-7532becf8077";
@@ -81,9 +92,8 @@ interface AgendaFormData {
 export async function submitContactForm(data: ContactFormData) {
   try {
     // 1. Email interno a Emerald
-    const { error } = await resend.emails.send({
-      from: FROM_CONTACT,
-      to: [TO_EMAIL],
+    await sendMail({
+      to: TO_EMAIL,
       subject: `Nuevo contacto: ${data.nombre}${data.empresa ? ` — ${data.empresa}` : ""}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1a1a;">
@@ -134,21 +144,12 @@ export async function submitContactForm(data: ContactFormData) {
       `,
     });
 
-    if (error) {
-      console.error("Resend error (internal):", error.message);
-      return { success: false, error: `No se pudo enviar: ${error.message}` };
-    }
-
     // 2. Email de confirmación al usuario
-    await resend.emails.send({
-      from: FROM_CONTACT,
-      to: [data.email],
+    await sendMail({
+      to: data.email,
       subject: `Recibimos tu mensaje, ${data.nombre.split(" ")[0]} 👋`,
-      html: confirmationEmailHtml({
-        nombre: data.nombre,
-        tipo: "contacto",
-      }),
-    }).catch((e) => console.error("Confirmation email failed:", e));
+      html: confirmationEmailHtml({ nombre: data.nombre, tipo: "contacto" }),
+    }).catch((e: unknown) => console.error("Confirmation email failed:", e));
 
     // 3. Guardar lead en Notion
     const notas = [
@@ -183,9 +184,8 @@ function escapeHtml(str: string) {
 export async function submitAgendaForm(data: AgendaFormData) {
   try {
     // 1. Email interno a Emerald
-    const { error } = await resend.emails.send({
-      from: FROM_AGENDA,
-      to: [TO_EMAIL],
+    await sendMail({
+      to: TO_EMAIL,
       subject: `Consulta estratégica: ${data.nombre}${data.empresa ? ` — ${data.empresa}` : ""}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1a1a;">
@@ -236,21 +236,12 @@ export async function submitAgendaForm(data: AgendaFormData) {
       `,
     });
 
-    if (error) {
-      console.error("Resend error (agenda internal):", error.message);
-      return { success: false, error: `No se pudo enviar: ${error.message}` };
-    }
-
     // 2. Confirmación al usuario
-    await resend.emails.send({
-      from: FROM_AGENDA,
-      to: [data.email],
+    await sendMail({
+      to: data.email,
       subject: `Solicitud recibida — te contactamos pronto, ${data.nombre.split(" ")[0]} 🗓️`,
-      html: confirmationEmailHtml({
-        nombre: data.nombre,
-        tipo: "agenda",
-      }),
-    }).catch((e) => console.error("Agenda confirmation email failed:", e));
+      html: confirmationEmailHtml({ nombre: data.nombre, tipo: "agenda" }),
+    }).catch((e: unknown) => console.error("Agenda confirmation email failed:", e));
 
     // 3. Guardar lead en Notion
     const notas = [
