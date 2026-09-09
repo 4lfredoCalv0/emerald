@@ -3,7 +3,7 @@
 Marketing site and AI assistants for **Emerald**, an AI-first digital agency
 based in Barranquilla, Colombia.
 
-**Live:** https://emerald-two-mu.vercel.app
+**Live:** https://emerald-co.vercel.app
 
 Built as a single Next.js application: the public site, an MDX blog, two
 conversational assistants and the lead-capture pipeline all live in the same
