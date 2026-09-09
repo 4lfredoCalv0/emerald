@@ -42,3 +42,6 @@ next-env.d.ts
 
 # skills de agentes bajadas de terceros — herramienta local, no parte del producto
 .agents/
+
+# config local de OpenCode — contiene claves de API
+opencode.json
