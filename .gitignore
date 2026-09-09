@@ -32,3 +32,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# datos de prospectos y clientes — nunca al repo (nombres, telefonos, direcciones)
+*.csv
+!content/**/*.csv
+
+# scratchpad de Claude Code
+.claude/
