@@ -39,3 +39,6 @@ next-env.d.ts
 
 # scratchpad de Claude Code
 .claude/
+
+# skills de agentes bajadas de terceros — herramienta local, no parte del producto
+.agents/
